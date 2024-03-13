@@ -9,6 +9,7 @@ import createError from "http-errors";
 import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
+import { apiRouter } from "./apiRouter";
 
 // ■ 削除
 // var indexRouter = require("./routes/index");
@@ -23,14 +24,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-// ルーターのマウント
-import { employeeApiController } from "./api/master/employeeApiController";
-app.use("/api/employees", employeeApiController());
-
 // ■ 削除
 // app.use(express.static(path.join(__dirname, "public")));
 // app.use("/", indexRouter);
 // app.use("/users", usersRouter);
+
+// api用ルーターをマウント
+app.use("/api", apiRouter());
 
 // ■ 追加 APIアクセス用のルートハンドラ
 app.get("/api", (req: Request, res: Response, next: NextFunction) => {

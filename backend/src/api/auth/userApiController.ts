@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 
-export const employeeApiController = () => {
+export const userApiController = () => {
   const router = express.Router();
 
   // middleware that is specific to this router
@@ -9,21 +9,21 @@ export const employeeApiController = () => {
     next();
   });
 
-  // GET /api/employees
+  // GET /api/users
   router.get(
     "/",
     async (request: Request, response: Response, next: NextFunction) => {
       try {
         // 1件 or 複数件
         if (request.query.id) {
-          // const employee = await employeeService.findById(request.query.id);
-          // if (!employee) throw new exceptionor('404 Not Found');
-          // response.json(employee);
-          response.json({ message: "GET employee by ID" });
+          // const user = await userService.findById(request.query.id);
+          // if (!user) throw new exceptionor('404 Not Found');
+          // response.json(user);
+          response.json({ message: "GET user by ID" });
         } else {
-          // const employees = await employeeService.findAll();
-          // response.json(employees);
-          response.json({ message: "GET employees" });
+          // const users = await userService.findAll();
+          // response.json(users);
+          response.json({ message: "GET users" });
         }
       } catch (exception: any) {
         next(exception);
@@ -31,56 +31,56 @@ export const employeeApiController = () => {
     }
   );
 
-  // POST /api/employees
+  // POST /api/users
   router.post(
     "/",
     async (request: Request, response: Response, next: NextFunction) => {
       try {
-        // const employee = await employeeService.create(request.body);
-        // response.json(employee);
-        response.json({ message: "POST employee" });
+        // const user = await userService.create(request.body);
+        // response.json(user);
+        response.json({ message: "POST user" });
       } catch (exception: any) {
         next(exception);
       }
     }
   );
 
-  // PATCH /api/employees/:id
+  // PATCH /api/users/:id
   router.patch(
     "/:id",
     async (request: Request, response: Response, next: NextFunction) => {
       try {
-        // const employee = await employeeService.update(request.params.id, request.body, { new: true });
-        // if (!employee) throw new exceptionor('404 Not Found');
-        // response.json(employee);
-        response.json({ message: "PATCH employee" });
+        // const user = await userService.update(request.params.id, request.body, { new: true });
+        // if (!user) throw new exceptionor('404 Not Found');
+        // response.json(user);
+        response.json({ message: "PATCH user" });
       } catch (exception: any) {
         next(exception);
       }
     }
   );
 
-  // DELETE /api/employees/:id
+  // DELETE /api/users/:id
   router.delete(
     "/:id",
     async (request: Request, response: Response, next: NextFunction) => {
       try {
-        // await employeeService.delete(request.params.id);
-        response.json({ message: "DELETE employee" });
+        // await userService.delete(request.params.id);
+        response.json({ message: "DELETE user" });
       } catch (exception: any) {
         next(exception);
       }
     }
   );
 
-  // GET /api/employees/sort
+  // GET /api/users/sort
   router.get(
     "/sort",
     async (request: Request, response: Response, next: NextFunction) => {
       try {
-        // const sortedEmployees = await Employee.find().sort({ /* ソート条件 */ });
-        // response.json(sortedEmployees);
-        response.json({ message: "SORT employees" });
+        // const sortedusers = await user.find().sort({ /* ソート条件 */ });
+        // response.json(sortedusers);
+        response.json({ message: "SORT users" });
       } catch (exception: any) {
         next(exception);
       }
