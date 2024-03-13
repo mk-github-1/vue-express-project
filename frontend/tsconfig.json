@@ -1,0 +1,25 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    },
+    {
+      "path": "./tsconfig.app.json"
+    },
+    {
+      "path": "./tsconfig.vitest.json"
+    }
+  ],
+  "compilerOptions": {
+    // "target": "",
+    "esModuleInterop": true, // ここを変更
+    "isolatedModules": true,
+    // "module": "commonjs",
+    // "outDir": "./dist",
+    "strict": true,
+    // "noImplicitThis": true,
+    "jsx": "preserve"
+  },
+  "include": ["./src/**/*."]
+}

@@ -1,0 +1,65 @@
+■ vite.config.tsの修正
+  plugins: [
+    // vue(),
+    vueJsx(),
+  ],
+
+■ tsconfig.jsonの設定追加
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "jsx": "preserve",
+    "module": "esnext",
+    "noEmit": true,
+    "types": ["vite/client"]
+  }
+
+■ router/index.ts
+.vueファイルに関係するコードをコメントアウト
+
+■ main.ts
+import App from './App.vue'
+→ import App from './App'
+
+■ HeaderView, FooterView, SidebarViewを作成
+
+■ App.vueをApp.tsxにし、書き換え
+import { defineComponent } from 'vue'
+import { RouterLink, RouterView } from 'vue-router'
+import HeaderView from './views/common/HeaderView'
+import FooterView from './views/common/FooterView'
+import SidebarView from './views/common/SidebarView'
+
+export default defineComponent({
+  name: 'App',
+  components: {
+    RouterLink,
+    RouterView
+  },
+  setup() {
+    return () => (
+      <div>
+        1. HeaderView
+        <br />
+        <HeaderView />
+        <br />
+        2. Nav
+        <br />
+        <nav>
+          <RouterLink to="/">Home</RouterLink>
+          <RouterLink to="/about">About</RouterLink>
+        </nav>
+        3. RouterView
+        <br />
+        <RouterView />
+        <br />
+        4. FooterView
+        <br />
+        <FooterView />
+        <br />
+        5. SidebarView
+        <br />
+        <SidebarView />
+      </div>
+    )
+  }
+})

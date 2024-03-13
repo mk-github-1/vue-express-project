@@ -1,0 +1,7 @@
+/* デフォルトのグリッドシステムを無効 */
+$enable-grid-classes: false;
+
+/* CSSグリッドを有効にします。その後、Sassを再コンパイルする */
+$enable-cssgrid: true;
+
+@import 'bootstrap/scss/bootstrap';
