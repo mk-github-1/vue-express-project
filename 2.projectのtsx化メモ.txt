@@ -1,4 +1,4 @@
-■ vite.config.tsの修正
+■ vite.config.tsのコメントアウト
   plugins: [
     // vue(),
     vueJsx(),
