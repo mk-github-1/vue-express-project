@@ -1,18 +1,16 @@
 import express, { Request, Response, NextFunction } from "express";
+import { User } from "../../domain-model/entity/auth/User";
 
 export const userApiController = () => {
   const router = express.Router();
-
-  // middleware that is specific to this router
-  router.use((request: Request, response: Response, next: NextFunction) => {
-    console.log("Time: ", Date.now());
-    next();
-  });
-
   // GET /api/users
   router.get(
     "/",
-    async (request: Request, response: Response, next: NextFunction) => {
+    async (
+      request: Request<number>,
+      response: Response,
+      next: NextFunction
+    ) => {
       try {
         // 1件 or 複数件
         if (request.query.id) {
@@ -30,6 +28,12 @@ export const userApiController = () => {
       }
     }
   );
+
+  // middleware that is specific to this router
+  router.use((request: Request, response: Response, next: NextFunction) => {
+    console.log("Time: ", Date.now());
+    next();
+  });
 
   // POST /api/users
   router.post(

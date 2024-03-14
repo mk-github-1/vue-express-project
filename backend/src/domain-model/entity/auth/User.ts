@@ -1,16 +1,23 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
-// @Entity()
-export interface User {
-  // @PrimaryGeneratedColumn()
+@Entity()
+export class User {
+  @PrimaryGeneratedColumn()
   id: number;
 
-  // @Column()
+  @Column()
   firstName: string;
 
-  // @Column()
+  @Column()
   lastName: string;
 
-  // @Column()
+  @Column()
   age: number;
+
+  constructor(id: number, firstName: string, lastName: string, age: number) {
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.age = age;
+  }
 }

@@ -6,7 +6,6 @@
 // var logger = require('morgan');
 import express, { Request, Response, NextFunction } from "express";
 import createError from "http-errors";
-import path from "path";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import { apiRouter } from "./apiRouter";
