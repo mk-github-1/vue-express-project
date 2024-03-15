@@ -1,13 +1,13 @@
-import express, { Request, Response, NextFunction } from "express";
-import bcrypt from "bcrypt";
-import { sign } from "jsonwebtoken";
+import express, { Request, Response, NextFunction } from 'express'
+import bcrypt from 'bcrypt'
+import { sign } from 'jsonwebtoken'
 
 export const authApiController = () => {
-  const router = express.Router();
+  const router = express.Router()
 
   // GET /api/auths
   router.get(
-    "/",
+    '/',
     async (
       request: Request<any, any, { email: string; password: string }>,
       response: Response,
@@ -15,7 +15,7 @@ export const authApiController = () => {
     ) => {
       try {
         // ログイン処理
-        const { email, password } = request.body;
+        const { email, password } = request.body
 
         /*
         const loggingInUser = await UserRepository.findOne({
@@ -29,15 +29,15 @@ export const authApiController = () => {
    
         if (!isPasswordCorrect) throw new Error();
          */
-        const isPasswordCorrect = await bcrypt.compare(password, "xxx");
+        const isPasswordCorrect = await bcrypt.compare(password, 'xxx')
 
         const jwtPayload = {
-          id: 0, // loggingInUser.id,
-        };
+          id: 0 // loggingInUser.id,
+        }
 
-        const token = sign(jwtPayload, "JWT_SECRET_KEY", {
-          expiresIn: "1h",
-        });
+        const token = sign(jwtPayload, 'JWT_SECRET_KEY', {
+          expiresIn: '1h'
+        })
 
         // sendで返すか、jsonで返すか
         /*
@@ -48,12 +48,24 @@ export const authApiController = () => {
          */
 
         // response.send(loggingInUser.id);
-        response.json({ id: "", token: token });
+        response.json({ id: '', token: token })
       } catch (exception: any) {
-        next(exception);
+        next(exception)
       }
     }
-  );
+  )
 
-  return router;
-};
+  // POST /api/auths
+  router.post('/', async (request: Request, response: Response, next: NextFunction) => {
+    // authServiceでuserRepositoryを使い、ユーザーを新規登録する
+    try {
+      // const user = await authService.create(request.body);
+      // response.json(user);
+      response.json({ message: 'POST user' })
+    } catch (exception: any) {
+      next(exception)
+    }
+  })
+
+  return router
+}

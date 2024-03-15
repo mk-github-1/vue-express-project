@@ -1,63 +1,60 @@
-// ■ 修正
+// ■ フォルダ移動、ファイル変更: backend/app.js -> backend/src/index.ts
+
+// ■ 修正: TypeScript化のため
 // var createError = require('http-errors');
 // var express = require('express');
 // var path = require('path');
 // var cookieParser = require('cookie-parser');
 // var logger = require('morgan');
-import express, { Request, Response, NextFunction } from "express";
-import createError from "http-errors";
-import cookieParser from "cookie-parser";
-import logger from "morgan";
-import { apiRouter } from "./apiRouter";
+import express, { Request, Response, NextFunction } from 'express'
+import createError from 'http-errors'
+import cookieParser from 'cookie-parser'
+import logger from 'morgan'
+import { apiRouter } from './apiRouter'
 
-// ■ 削除
+// ■ 削除: APIとして利用するため
 // var indexRouter = require("./routes/index");
 // var usersRouter = require("./routes/users");
 
-// ■ 修正
+// ■ 修正: TypeScript化のため
 // var app = express();
-const app = express();
+const app = express()
 
-app.use(logger("dev"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(logger('dev'))
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }))
+app.use(cookieParser())
 
-// ■ 削除
+// ■ 削除: APIとして利用するため、publicは不要、ルーター変更
 // app.use(express.static(path.join(__dirname, "public")));
 // app.use("/", indexRouter);
 // app.use("/users", usersRouter);
 
-// api用ルーターをマウント
-app.use("/api", apiRouter());
+// ■ 追加: APIアクセス用のルートハンドラ
+app.get('/api', (req: Request, res: Response, next: NextFunction) => {
+  res.json({ message: '200 OK' })
+})
 
-// ■ 追加 APIアクセス用のルートハンドラ
-app.get("/api", (req: Request, res: Response, next: NextFunction) => {
-  res.json({ message: "200 OK" });
-});
+// ■ 追加: API用ルーターをマウント
+app.use('/api', apiRouter())
 
-// ■ 変更 catch 404 and forward to error handler
+// ■ 追加: エラーハンドラ ※Express.js viewありのものよりコピー、TypeScript化
 app.use(function (req: Request, res: Response, next: NextFunction) {
-  next(createError(404));
-});
+  next(createError(404))
+})
 
-// ■ 変更 error handler
 app.use(function (err: Error, req: Request, res: Response, next: NextFunction) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
+  res.locals.message = err.message
+  res.locals.error = req.app.get('env') === 'development' ? err : {}
 
-  // render the error page (view engineを使用しないのでjsonで返す)
-  const httpStatusCode = (err as any).status || 500;
-  res
-    .status(httpStatusCode)
-    .json({ message: httpStatusCode + " " + err.message });
-});
+  const httpStatusCode = (err as any).status || 500
+  res.status(httpStatusCode).json({ message: httpStatusCode + ' ' + err.message })
+})
 
-// ■ 追加 ポート指定
-const port = process.env.PORT || 3000;
+// ■ 追加: ポート設定がなかったので追加、これで起動できる
+const port = process.env.PORT || 3000
 app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+  console.log(`Server is running on port ${port}`)
+})
 
-module.exports = app;
+module.exports = app

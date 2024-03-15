@@ -1,19 +1,24 @@
-import express from "express";
-import { userApiController } from "./api/master/userApiController";
-import { authApiController } from "./api/auth/authApiController";
+// ■ 追加: index.tsでマウントするルータを別ファイル化しています
+import express from 'express'
 
-// index.tsでマウントするルータを別ファイル可しています
-// ルート名は複数系にする
+// 1.auth
+import { authApiController } from './api/auth/authApiController'
+
+// 2.master
+import { userApiController } from './api/master/userApiController'
+
+// 3.transaction
+
 export const apiRouter = () => {
-  const router = express.Router();
+  const router = express.Router()
 
-  // ※Express.jsではControllerを共通化できるかもしれない
+  // ルート名は複数系にする
 
   // 1.auth
-  router.use("/auths", authApiController());
+  router.use('/auths', authApiController())
 
   // 2.master
-  router.use("/users", userApiController());
+  router.use('/users', userApiController())
   // (例)
   // router.use("/groups", groupApiController());
 
@@ -21,5 +26,5 @@ export const apiRouter = () => {
   // (例)
   // router.use("/managements", managementApiController());
 
-  return router;
-};
+  return router
+}
