@@ -11,17 +11,16 @@
       "cwd": "${workspaceFolder}/frontend",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
-      "env": {
-        "BROWSER": "none"
-      },
-      "console": "integratedTerminal"
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**"]
     },
     {
       "name": "frontend-debug",
       "type": "chrome",
       "request": "launch",
       "url": "http://localhost:5173",
-      "webRoot": "${workspaceFolder}/frontend"
+      "webRoot": "${workspaceFolder}/frontend",
+      "skipFiles": ["<node_internals>/**"]
     },
     {
       "name": "backend-launch",
@@ -31,9 +30,12 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
       "env": {
-        "PORT": "3000" /* Reactの場合はport5000に変更する */
+        "PORT": "3000"
       },
-      "console": "integratedTerminal"
+      "console": "integratedTerminal",
+      "skipFiles": ["<node_internals>/**"],
+      "restart": true
+      // "internalConsoleOptions": "neverOpen",
     }
   ],
   "compounds": [

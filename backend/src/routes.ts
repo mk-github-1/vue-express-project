@@ -2,23 +2,23 @@
 import express from 'express'
 
 // 1.auth
-import { authApiController } from './api/auth/authApiController'
+import AuthApiController from './api/auth/AuthApiController'
 
 // 2.master
-import { userApiController } from './api/master/userApiController'
+import UserApiController from './api/master/UserApiController'
 
 // 3.transaction
 
-export const apiRouter = () => {
+export default () => {
   const router = express.Router()
 
   // ルート名は複数系にする
 
   // 1.auth
-  router.use('/auths', authApiController())
+  router.use('/auths', AuthApiController())
 
   // 2.master
-  router.use('/users', userApiController())
+  router.use('/users', UserApiController())
   // (例)
   // router.use("/groups", groupApiController());
 

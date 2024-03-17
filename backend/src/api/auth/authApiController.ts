@@ -2,7 +2,8 @@ import express, { Request, Response, NextFunction } from 'express'
 import bcrypt from 'bcrypt'
 import { sign } from 'jsonwebtoken'
 
-export const authApiController = () => {
+// AuthApiController
+export default () => {
   const router = express.Router()
 
   // GET /api/auths
@@ -13,11 +14,15 @@ export const authApiController = () => {
       response: Response,
       next: NextFunction
     ) => {
-      try {
-        // ログイン処理
-        const { email, password } = request.body
+      // Requestのvalidation実施
 
-        /*
+      // 例外処理
+      // next(new CustomException(400, '', 'warning'))
+
+      // ログイン処理
+      const { email, password } = request.body
+
+      /*
         const loggingInUser = await UserRepository.findOne({
           where: {
             email: payload.email,
@@ -29,42 +34,40 @@ export const authApiController = () => {
    
         if (!isPasswordCorrect) throw new Error();
          */
-        const isPasswordCorrect = await bcrypt.compare(password, 'xxx')
+      const isPasswordCorrect = await bcrypt.compare(password, 'xxx')
 
-        const jwtPayload = {
-          id: 0 // loggingInUser.id,
-        }
+      const jwtPayload = {
+        id: 0 // loggingInUser.id,
+      }
 
-        const token = sign(jwtPayload, 'JWT_SECRET_KEY', {
-          expiresIn: '1h'
-        })
+      const token = sign(jwtPayload, 'JWT_SECRET_KEY', {
+        expiresIn: '1h'
+      })
 
-        // sendで返すか、jsonで返すか
-        /*
+      // sendで返すか、jsonで返すか
+      /*
         response.cookie("token", token, {
           httpOnly: true,
           secure: true,
         });
          */
 
-        // response.send(loggingInUser.id);
-        response.json({ id: '', token: token })
-      } catch (exception: any) {
-        next(exception)
-      }
+      // response.send(loggingInUser.id);
+      response.json({ id: '', token: token })
     }
   )
 
   // POST /api/auths
   router.post('/', async (request: Request, response: Response, next: NextFunction) => {
+    // Requestのvalidation実施
+
+    // 例外処理
+    // next(new CustomException(400, '', 'warning'))
+
     // authServiceでuserRepositoryを使い、ユーザーを新規登録する
-    try {
-      // const user = await authService.create(request.body);
-      // response.json(user);
-      response.json({ message: 'POST user' })
-    } catch (exception: any) {
-      next(exception)
-    }
+    // const user = await authService.create(request.body);
+    // response.json(user);
+    response.json({ message: 'POST user' })
   })
 
   return router

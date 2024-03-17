@@ -10,7 +10,9 @@ import express, { Request, Response, NextFunction } from 'express'
 import createError from 'http-errors'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
-import { apiRouter } from './apiRouter'
+import routes from './routes'
+import { CustomException } from './domain-model/CustomException'
+import { getErrorMessage } from './error'
 
 // ■ 削除: APIとして利用するため
 // var indexRouter = require("./routes/index");
@@ -31,25 +33,26 @@ app.use(cookieParser())
 // app.use("/users", usersRouter);
 
 // ■ 追加: APIアクセス用のルートハンドラ
-app.get('/api', (req: Request, res: Response, next: NextFunction) => {
-  res.json({ message: '200 OK' })
+app.get('/api', (request: Request, response: Response, nextFunction: NextFunction) => {
+  response.json({ message: '200 OK' })
 })
 
 // ■ 追加: API用ルーターをマウント
-app.use('/api', apiRouter())
+app.use('/api', routes())
 
-// ■ 追加: エラーハンドラ ※Express.js viewありのものよりコピー、TypeScript化
-app.use(function (req: Request, res: Response, next: NextFunction) {
-  next(createError(404))
-})
+// ■ 追加: 共通の例外時のエラー処理
+app.use(
+  (error: CustomException, request: Request, response: Response, nextFunction: NextFunction) => {
+    const httpStatusCode = (error as CustomException).httpStatusCode || 500
+    const message = getErrorMessage(httpStatusCode)
 
-app.use(function (err: Error, req: Request, res: Response, next: NextFunction) {
-  res.locals.message = err.message
-  res.locals.error = req.app.get('env') === 'development' ? err : {}
+    // ログ出力（任意）
+    console.error(error.stack)
 
-  const httpStatusCode = (err as any).status || 500
-  res.status(httpStatusCode).json({ message: httpStatusCode + ' ' + err.message })
-})
+    // エラーレスポンスをjsonデータで返す
+    response.status(httpStatusCode).json({ message })
+  }
+)
 
 // ■ 追加: ポート設定がなかったので追加、これで起動できる
 const port = process.env.PORT || 3000
