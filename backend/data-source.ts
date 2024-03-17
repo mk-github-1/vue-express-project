@@ -1,7 +1,7 @@
 // ■ 追加: TypeORM設定
 import 'reflect-metadata'
 import { DataSource } from 'typeorm'
-import { User } from './src/domain-model/entity/auth/User'
+import { User } from './src/domain-model/entity/auth/LoginUser'
 
 export const AppDataSource = new DataSource({
   type: 'sqlite', // or mysql or postgresql

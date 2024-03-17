@@ -1,5 +1,5 @@
 import express, { Request, Response, NextFunction } from 'express'
-import { User } from '../../domain-model/entity/auth/User'
+import { User } from '../../domain-model/entity/auth/LoginUser'
 import { CustomException } from '../../domain-model/CustomException'
 
 // UserApiController
