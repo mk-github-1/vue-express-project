@@ -5,7 +5,7 @@ import express from 'express'
 import AuthApiController from './api/auth/AuthApiController'
 
 // 2.master
-import UserApiController from './api/master/UserApiController'
+import LoginUserApiController from './api/master/LoginUserApiController'
 
 // 3.transaction
 
@@ -18,7 +18,7 @@ export default () => {
   router.use('/auths', AuthApiController())
 
   // 2.master
-  router.use('/users', UserApiController())
+  router.use('/loginUsers', LoginUserApiController())
   // (例)
   // router.use("/groups", groupApiController());
 
