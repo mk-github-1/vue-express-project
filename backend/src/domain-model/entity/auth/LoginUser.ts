@@ -73,6 +73,6 @@ export class LoginUser {
   private updatedAt: Date
 
   // ユーザーが持つ権限のリスト
-  // @OneToMany({ mappedBy: "loginUser", cascade: CascadeType.ALL, orphanRemoval: true, fetch: FetchType.EAGER })
+  @OneToMany(() => LoginUserRole, loginUserRole => loginUserRole.loginUser, { cascade: true, eager: true, onDelete: 'CASCADE' })
   private loginUserRoles: LoginUserRole[]
 }
