@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm'
 import { LoginUser } from './LoginUser'
 import { Role } from './Role'
 // import { Role } from './Role';
@@ -49,11 +49,13 @@ export class LoginUserRole {
   @Column({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
   private updatedAt: Date
 
-  // @ManyToOne({ fetch: FetchType.LAZY })
-  // @JoinColumn({ name: "username", referencedColumnName: "username", insertable: false, updatable: false })
-  private loginUser?: LoginUser;
-  
-  // @ManyToOne({ fetch: FetchType.LAZY })
-  // @JoinColumn({ name: "roleId", referencedColumnName: "roleId", insertable: false, updatable: false })
-  private role?: Role;
+    // LoginUser エンティティとの ManyToOne 関係
+    // @ManyToOne(() => LoginUser, { fetch: 'LAZY' })
+    // @JoinColumn({ name: 'username', referencedColumnName: 'username', insert: false, update: false })
+    loginUser?: LoginUser;
+
+    // Role エンティティとの ManyToOne 関係
+    // @ManyToOne(() => Role, { fetch: 'LAZY' })
+    // @JoinColumn({ name: 'roleId', referencedColumnName: 'roleId', insert: false, update: false })
+    role?: Role;
 }
