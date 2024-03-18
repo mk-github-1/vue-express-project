@@ -1,5 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm'
-import { LoginUserRole } from './LoginUserRole';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn } from 'typeorm'
+import { LoginUserRole } from './LoginUserRole'
 
 /**
  * LoginUser: ログインユーザー
@@ -31,48 +31,66 @@ export class LoginUser {
     this.isDeleted = isDeleted
 
     // ■ 作成日時、更新日時の自動更新処理が必要
-    this.createdAt = createdAt ?? new Date()
-    this.updatedAt = updatedAt ?? new Date()
+    this.createdAt = createdAt
+    this.updatedAt = updatedAt
 
     this.loginUserRoles = []
   }
 
-  @PrimaryGeneratedColumn({ name: 'username'})
+  @PrimaryGeneratedColumn({
+    name: 'username'
+  })
   @Column({ length: 256 })
-  private username: string
+  public username: string = ''
 
-  @Column({ length: 256, nullable: false })
-  private password: string
+  @Column({ length: 256 })
+  public password: string = ''
 
   // アカウントが有効かどうかを示すフラグ
-  @Column({ default: true })
-  private enabled: boolean
+  @Column()
+  public enabled: boolean = false
 
   // アカウントの有効期限が切れているかどうかを示すフラグ
-  @Column({ default: true })
-  private accountNonExpired: boolean
+  @Column()
+  public accountNonExpired: boolean = false
 
   // 資格情報の有効期限が切れているかどうかを示すフラグ
-  @Column({ default: true })
-  private accountNonLocked: boolean
+  @Column()
+  public accountNonLocked: boolean = false
 
   // アカウントがロックされているかどうかを示すフラグ
-  @Column({ default: true })
-  private credentialsNonExpired: boolean
+  @Column()
+  public credentialsNonExpired: boolean = false
 
   @Column()
-  private sortOrder?: number
+  public sortOrder: number = 0
 
-  @Column({ nullable: true })
-  private isDeleted: boolean
+  @Column()
+  public isDeleted: boolean = false
 
-  @Column({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
-  private createdAt: Date
+  /*
+  @Column({
+    // type: 'timestamptz',
+    default: () => 'CURRENT_TIMESTAMP'
+  })
+   */
+  @Column()
+  public createdAt: Date = new Date()
 
-  @Column({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
-  private updatedAt: Date
+  @Column()
+  public updatedAt: Date = new Date()
 
   // ユーザーが持つ権限のリスト
-  @OneToMany(() => LoginUserRole, loginUserRole => loginUserRole.loginUser, { cascade: true, eager: true, onDelete: 'CASCADE' })
-  private loginUserRoles: LoginUserRole[]
+  @OneToMany(() => LoginUserRole, (loginUserRole) => loginUserRole.loginUser, {
+    createForeignKeyConstraints: false,
+    persistence: false,
+    cascade: true,
+    eager: true,
+    onDelete: 'CASCADE'
+  })
+  @JoinColumn({
+    name: 'username',
+    referencedColumnName: 'username'
+  })
+  public loginUserRoles: LoginUserRole[]
 }

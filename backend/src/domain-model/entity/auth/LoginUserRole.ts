@@ -12,7 +12,7 @@ import { Role } from './Role'
 export class LoginUserRole {
   constructor(
     username: string,
-    roleId: number,
+    roleId: string,
     sortOrder: number,
     isDeleted: boolean,
     createdAt: Date,
@@ -24,38 +24,55 @@ export class LoginUserRole {
     this.roleId = roleId
     this.sortOrder = sortOrder
     this.isDeleted = isDeleted
-    this.createdAt = createdAt ?? new Date()
-    this.updatedAt = updatedAt ?? new Date()
+    this.createdAt = createdAt
+    this.updatedAt = updatedAt
     // this.loginUser = null
     // this.role = null
   }
 
-  @PrimaryGeneratedColumn({ name: 'username'})
+  @PrimaryGeneratedColumn({
+    name: 'username'
+  })
   @Column({ length: 256 })
-  private username: string
+  public username: string = ''
 
-  @Column({ length: 256, nullable: false })
-  private roleId: number
+  @PrimaryGeneratedColumn({
+    name: 'roleId'
+  })
+  @Column({ length: 256 })
+  public roleId: string = ''
 
   @Column()
-  private sortOrder?: number
+  public sortOrder: number = 0
 
-  @Column({ nullable: true })
-  private isDeleted: boolean
+  @Column()
+  public isDeleted: boolean = false
 
-  @Column({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
-  private createdAt: Date
+  @Column()
+  public createdAt: Date = new Date()
 
-  @Column({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
-  private updatedAt: Date
+  @Column()
+  public updatedAt: Date = new Date()
 
-    // LoginUser エンティティとの ManyToOne 関係
-    @ManyToOne(() => LoginUser)
-    @JoinColumn({ name: 'username', referencedColumnName: 'username'})
-    loginUser?: LoginUser;
+  // LoginUser エンティティとの ManyToOne 関係
+  @ManyToOne(() => LoginUser, (loginUser) => loginUser.username, {
+    createForeignKeyConstraints: false,
+    persistence: false
+  })
+  @JoinColumn({
+    name: 'username',
+    referencedColumnName: 'username'
+  })
+  loginUser?: LoginUser
 
-    // Role エンティティとの ManyToOne 関係
-    @ManyToOne(() => Role)
-    @JoinColumn({ name: 'roleId', referencedColumnName: 'roleId'})
-    role?: Role;
+  // Role エンティティとの ManyToOne 関係
+  @ManyToOne(() => Role, (role) => role.roleId, {
+    createForeignKeyConstraints: false,
+    persistence: false
+  })
+  @JoinColumn({
+    name: 'roleId',
+    referencedColumnName: 'roleId'
+  })
+  role?: Role
 }
