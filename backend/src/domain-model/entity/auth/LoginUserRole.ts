@@ -11,7 +11,7 @@ import { Role } from './Role'
 @Entity()
 export class LoginUserRole {
   constructor(data: {
-    username: string
+    account: string
     roleId: string
     sortOrder: number
     isDeleted: boolean
@@ -20,7 +20,7 @@ export class LoginUserRole {
     loginUser: LoginUser
     role: Role
   }) {
-    this.username = data ? data.username : ''
+    this.account = data ? data.account : ''
     this.roleId = data ? data.roleId : ''
     this.sortOrder = data ? data.sortOrder : 0
     this.isDeleted = data ? data.isDeleted : false
@@ -32,10 +32,10 @@ export class LoginUserRole {
   }
 
   @PrimaryGeneratedColumn({
-    name: 'username'
+    name: 'account'
   })
   @Column({ length: 256 })
-  public username: string = ''
+  public readonly account: string = ''
 
   @PrimaryGeneratedColumn({
     name: 'roleId'
@@ -61,8 +61,8 @@ export class LoginUserRole {
     persistence: false
   })
   @JoinColumn({
-    name: 'username',
-    referencedColumnName: 'username'
+    name: 'account',
+    referencedColumnName: 'account'
   })
   loginUser?: LoginUser
 

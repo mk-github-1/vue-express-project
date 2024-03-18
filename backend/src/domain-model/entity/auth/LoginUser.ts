@@ -9,6 +9,7 @@ import { LoginUserRole } from './LoginUserRole'
 @Entity()
 export class LoginUser {
   constructor(data: {
+    account: string
     username: string
     password: string
     enabled: boolean
@@ -21,6 +22,7 @@ export class LoginUser {
     updatedAt: Date
     loginUserRole: LoginUserRole[]
   }) {
+    this.account = data ? data.account : ''
     this.username = data ? data.username : ''
     this.password = data ? data.password : ''
     this.enabled = data ? data.enabled : false
@@ -41,7 +43,10 @@ export class LoginUser {
     name: 'username'
   })
   @Column({ length: 256 })
-  public username: string = ''
+  public readonly account: string = ''
+
+  @Column({ length: 256 })
+  public readonly username: string = ''
 
   @Column({ length: 256 })
   public password: string = ''
@@ -89,8 +94,8 @@ export class LoginUser {
     onDelete: 'CASCADE'
   })
   @JoinColumn({
-    name: 'username',
-    referencedColumnName: 'username'
+    name: 'account',
+    referencedColumnName: 'account'
   })
   public loginUserRoles: LoginUserRole[]
 }

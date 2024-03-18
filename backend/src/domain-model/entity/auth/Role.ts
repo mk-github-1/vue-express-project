@@ -27,7 +27,7 @@ export class Role {
     name: 'roleId'
   })
   @Column({ length: 256 })
-  public roleId: string = ''
+  public readonly roleId: string = ''
 
   @Column({ length: 32 })
   public roleName: string = ''
