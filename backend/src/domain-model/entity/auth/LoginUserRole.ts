@@ -50,12 +50,12 @@ export class LoginUserRole {
   private updatedAt: Date
 
     // LoginUser エンティティとの ManyToOne 関係
-    // @ManyToOne(() => LoginUser, { fetch: 'LAZY' })
-    // @JoinColumn({ name: 'username', referencedColumnName: 'username', insert: false, update: false })
+    @ManyToOne(() => LoginUser)
+    @JoinColumn({ name: 'username', referencedColumnName: 'username'})
     loginUser?: LoginUser;
 
     // Role エンティティとの ManyToOne 関係
-    // @ManyToOne(() => Role, { fetch: 'LAZY' })
-    // @JoinColumn({ name: 'roleId', referencedColumnName: 'roleId', insert: false, update: false })
+    @ManyToOne(() => Role)
+    @JoinColumn({ name: 'roleId', referencedColumnName: 'roleId'})
     role?: Role;
 }
