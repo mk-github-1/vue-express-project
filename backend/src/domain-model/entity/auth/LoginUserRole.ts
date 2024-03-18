@@ -1,13 +1,23 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm'
+import {
+  Entity,
+  PrimaryColumn,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  OneToOne,
+  ManyToOne,
+  OneToMany,
+  JoinColumn
+} from 'typeorm'
 import { LoginUser } from './LoginUser'
 import { Role } from './Role'
-// import { Role } from './Role';
 
 /**
  * LoginUserRole: ログインユーザー権限の中間テーブル
  *
  */
-// @Table({ name: "login_user_role" })
+// @Entity('login_user_role')
 @Entity()
 export class LoginUserRole {
   constructor(data: {
@@ -49,10 +59,10 @@ export class LoginUserRole {
   @Column()
   public isDeleted: boolean = false
 
-  @Column()
+  @CreateDateColumn()
   public createdAt: Date = new Date()
 
-  @Column()
+  @UpdateDateColumn()
   public updatedAt: Date = new Date()
 
   // LoginUser エンティティとの ManyToOne 関係

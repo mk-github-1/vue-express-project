@@ -1,10 +1,21 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
+import {
+  Entity,
+  PrimaryColumn,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  OneToOne,
+  ManyToOne,
+  OneToMany,
+  JoinColumn
+} from 'typeorm'
 
 /**
  * Role: 権限
  *
  */
-// @Table({ name: "role" })
+// @Entity('role')
 @Entity()
 export class Role {
   constructor(data: {
@@ -38,9 +49,9 @@ export class Role {
   @Column()
   public isDeleted: boolean = false
 
-  @Column()
+  @CreateDateColumn()
   public createdAt: Date = new Date()
 
-  @Column()
+  @UpdateDateColumn()
   public updatedAt: Date = new Date()
 }

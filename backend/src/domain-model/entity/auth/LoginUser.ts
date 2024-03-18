@@ -1,11 +1,22 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, JoinColumn } from 'typeorm'
+import {
+  Entity,
+  PrimaryColumn,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  OneToOne,
+  ManyToOne,
+  OneToMany,
+  JoinColumn
+} from 'typeorm'
 import { LoginUserRole } from './LoginUserRole'
 
 /**
  * LoginUser: ログインユーザー
  *
  */
-// @Table({ name: "login_user" })
+// @Entity('login_user')
 @Entity()
 export class LoginUser {
   constructor(data: {
@@ -39,7 +50,7 @@ export class LoginUser {
     this.loginUserRoles = data ? data.loginUserRole : []
   }
 
-  @PrimaryGeneratedColumn({
+  @PrimaryColumn({
     name: 'username'
   })
   @Column({ length: 256 })
@@ -79,19 +90,19 @@ export class LoginUser {
     default: () => 'CURRENT_TIMESTAMP'
   })
    */
-  @Column()
+  @CreateDateColumn()
   public createdAt: Date = new Date()
 
-  @Column()
+  @UpdateDateColumn()
   public updatedAt: Date = new Date()
 
   // ユーザーが持つ権限のリスト
   @OneToMany(() => LoginUserRole, (loginUserRole) => loginUserRole.loginUser, {
     createForeignKeyConstraints: false,
-    persistence: false,
-    cascade: true,
-    eager: true,
-    onDelete: 'CASCADE'
+    persistence: false
+    // cascade: true,
+    // eager: true,
+    // onDelete: 'CASCADE'
   })
   @JoinColumn({
     name: 'account',
