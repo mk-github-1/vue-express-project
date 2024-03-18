@@ -7,20 +7,20 @@ import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
 // @Table({ name: "role" })
 @Entity()
 export class Role {
-  constructor(
-    roleId: string,
-    roleName: string,
-    sortOrder: number,
-    isDeleted: boolean,
-    createdAt: Date,
+  constructor(data: {
+    roleId: string
+    roleName: string
+    sortOrder: number
+    isDeleted: boolean
+    createdAt: Date
     updatedAt: Date
-  ) {
-    this.roleId = roleId
-    this.roleName = roleName
-    this.sortOrder = sortOrder
-    this.isDeleted = isDeleted
-    this.createdAt = createdAt
-    this.updatedAt = updatedAt
+  }) {
+    this.roleId = data ? data.roleId : ''
+    this.roleName = data ? data.roleName : ''
+    this.sortOrder = data ? data.sortOrder : 0
+    this.isDeleted = data ? data.isDeleted : false
+    this.createdAt = data ? data.createdAt : new Date()
+    this.updatedAt = data ? data.updatedAt : new Date()
   }
 
   @PrimaryGeneratedColumn({

@@ -10,24 +10,25 @@ import { Role } from './Role'
 // @Table({ name: "login_user_role" })
 @Entity()
 export class LoginUserRole {
-  constructor(
-    username: string,
-    roleId: string,
-    sortOrder: number,
-    isDeleted: boolean,
-    createdAt: Date,
+  constructor(data: {
+    username: string
+    roleId: string
+    sortOrder: number
+    isDeleted: boolean
+    createdAt: Date
     updatedAt: Date
-    // loginUser: LoginUser,
-    // role: Role
-  ) {
-    this.username = username
-    this.roleId = roleId
-    this.sortOrder = sortOrder
-    this.isDeleted = isDeleted
-    this.createdAt = createdAt
-    this.updatedAt = updatedAt
-    // this.loginUser = null
-    // this.role = null
+    loginUser: LoginUser
+    role: Role
+  }) {
+    this.username = data ? data.username : ''
+    this.roleId = data ? data.roleId : ''
+    this.sortOrder = data ? data.sortOrder : 0
+    this.isDeleted = data ? data.isDeleted : false
+    this.createdAt = data ? data.createdAt : new Date()
+    this.updatedAt = data ? data.updatedAt : new Date()
+
+    // this.loginUser = data ? data.loginUser : null
+    // this.role = data ? data.role : null
   }
 
   @PrimaryGeneratedColumn({

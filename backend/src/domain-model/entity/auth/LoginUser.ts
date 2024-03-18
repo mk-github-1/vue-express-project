@@ -8,33 +8,33 @@ import { LoginUserRole } from './LoginUserRole'
 // @Table({ name: "login_user" })
 @Entity()
 export class LoginUser {
-  constructor(
-    username: string,
-    password: string,
-    enabled: boolean,
-    accountNonExpired: boolean,
-    accountNonLocked: boolean,
-    credentialsNonExpired: boolean,
-    sortOrder: number,
-    isDeleted: boolean,
-    createdAt: Date,
-    updatedAt: Date,
+  constructor(data: {
+    username: string
+    password: string
+    enabled: boolean
+    accountNonExpired: boolean
+    accountNonLocked: boolean
+    credentialsNonExpired: boolean
+    sortOrder: number
+    isDeleted: boolean
+    createdAt: Date
+    updatedAt: Date
     loginUserRole: LoginUserRole[]
-  ) {
-    this.username = username
-    this.password = password
-    this.enabled = enabled
-    this.accountNonExpired = accountNonExpired
-    this.accountNonLocked = accountNonLocked
-    this.credentialsNonExpired = credentialsNonExpired
-    this.sortOrder = sortOrder
-    this.isDeleted = isDeleted
+  }) {
+    this.username = data ? data.username : ''
+    this.password = data ? data.password : ''
+    this.enabled = data ? data.enabled : false
+    this.accountNonExpired = data ? data.accountNonExpired : true
+    this.accountNonLocked = data ? data.accountNonLocked : true
+    this.credentialsNonExpired = data ? data.credentialsNonExpired : true
+    this.sortOrder = data ? data.sortOrder : 0
+    this.isDeleted = data ? data.isDeleted : false
 
     // ■ 作成日時、更新日時の自動更新処理が必要
-    this.createdAt = createdAt
-    this.updatedAt = updatedAt
+    this.createdAt = data ? data.createdAt : new Date()
+    this.updatedAt = data ? data.updatedAt : new Date()
 
-    this.loginUserRoles = []
+    this.loginUserRoles = data ? data.loginUserRole : []
   }
 
   @PrimaryGeneratedColumn({
