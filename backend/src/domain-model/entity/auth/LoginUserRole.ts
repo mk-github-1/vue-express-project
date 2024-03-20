@@ -41,13 +41,13 @@ export class LoginUserRole {
     // this.role = data ? data.role : null
   }
 
-  @PrimaryGeneratedColumn({
+  @PrimaryColumn({
     name: 'account'
   })
   @Column({ length: 256 })
   public readonly account: string = ''
 
-  @PrimaryGeneratedColumn({
+  @PrimaryColumn({
     name: 'roleId'
   })
   @Column({ length: 256 })

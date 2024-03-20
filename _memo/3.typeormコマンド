@@ -1,0 +1,20 @@
+TypeORM 0.3系のマイグレーション
+
+
+■ create (空のマイグレーションファイル作成)
+> npx typeorm migration:create ./migration/migration
+
+■ generate (entityからのマイグレーションファイル作成)
+> npx typeorm-ts-node-commonjs migration:generate ./migration/<YourMigration> -d src/data-source.ts
+> npx typeorm-ts-node-commonjs migration:generate ./migration/1710971514558-migration -d src/data-source.ts
+
+■ run (マイグレーション実行)
+> npx typeorm-ts-node-commonjs migration:run -d src/data-source.ts
+
+■ package.jsonに記載する場合
+"scripts": {
+  "typeorm": "npx typeorm-ts-node-commonjs",
+  "migration:create": "npx typeorm migration:create src/migration/migration",
+  "migration:generate": "npx typeorm-ts-node-commonjs migration:generate src/migration/<YourMigration> -d src/data-source.ts",
+  "migration:run": "npx typeorm-ts-node-commonjs migration:run -d src/data-source.ts"
+}

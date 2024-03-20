@@ -34,7 +34,7 @@ export class Role {
     this.updatedAt = data ? data.updatedAt : new Date()
   }
 
-  @PrimaryGeneratedColumn({
+  @PrimaryColumn({
     name: 'roleId'
   })
   @Column({ length: 256 })

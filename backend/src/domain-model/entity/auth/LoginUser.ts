@@ -51,7 +51,7 @@ export class LoginUser {
   }
 
   @PrimaryColumn({
-    name: 'username'
+    name: 'account'
   })
   @Column({ length: 256 })
   public readonly account: string = ''
