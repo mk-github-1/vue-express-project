@@ -1,31 +1,29 @@
 TypeORM 0.3系のマイグレーション
 
+
 ■ 0.create 空のマイグレーションファイル作成
 (Entityクラスから生成する場合は不要)
 > npx typeorm-ts-node-commonjs  migration:create ./migrations/migration
 
+
 ■ 1.generate entityからマイグレーションファイル作成 ※DB定義のファイル(新規 or 差分)
-> npx typeorm-ts-node-commonjs migration:generate -d data-source.ts ./migrations/migration
+> npm run typeorm migration:generate -- --dataSource data-source.ts --pretty migrations/migration
 or
-> npm run typeorm migration:generate -- --dataSource datasource.ts --pretty migrations/migration
+> npx typeorm-ts-node-commonjs migration:generate -d data-source.ts ./migrations/migration
+
 
 ■ 2.run マイグレーション実行
+> npm run typeorm migration:run -- --dataSource data-source.ts
+or
 > npx typeorm-ts-node-commonjs migration:run -d data-source.ts
+
+
+■ 3. 差分更新の方法
+差分を更新したい時、再度1.2を実行、
+リレーション設定でうまく実行できない場合はEntityクラスの見直しが必要
+
+
+■ 4. revert 戻す手順
+> npm run typeorm migration:revert -- --dataSource data-source.ts
 or
-> npm run typeorm migration:run -- --dataSource datasource.ts
-
-■ 3. 差分更新
-差分を更新したい時、再度1.2を実行、リレーション設定でうまく実行できない場合は
-Entityクラスの見直しは必要
-
-■ 4. 戻す手順
 > npx typeorm-ts-node-commonjs migration:revert -d data-source.ts
-or
-> npm run typeorm migration:revert -- --dataSource datasource.ts
-
-■ package.jsonに記載する場合？
-"scripts": {
-  "typeorm": "npx typeorm-ts-node-commonjs",
-  "typeorm-migration:generate": "npx typeorm-ts-node-commonjs migration:generate src/migrations/migration -d data-source.ts",
-  "typeorm-migration:run": "npx typeorm-ts-node-commonjs migration:run -d data-source.ts"
-}
