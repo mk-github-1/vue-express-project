@@ -50,10 +50,7 @@ export class LoginUser {
     this.loginUserRoles = data ? data.loginUserRole : []
   }
 
-  @PrimaryColumn({
-    name: 'account'
-  })
-  @Column({ length: 256 })
+  @PrimaryColumn({ length: 256 })
   public readonly account: string = ''
 
   @Column({ length: 256 })
