@@ -34,10 +34,7 @@ export class Role {
     this.updatedAt = data ? data.updatedAt : new Date()
   }
 
-  @PrimaryColumn({
-    name: 'roleId'
-  })
-  @Column({ length: 256 })
+  @PrimaryColumn({ length: 256 })
   public readonly roleId: string = ''
 
   @Column({ length: 32 })
