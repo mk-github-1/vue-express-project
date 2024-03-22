@@ -4,7 +4,7 @@ import { LoginUserModel } from '@/domain-model/model/auth/LoginUserModel'
 
 // (注)1ファイルにつき、1つのnamed exportにしてファイル名とexport名を合わせる
 // ESLintでその方法を判定できるか調査が必要
-export const loginUserRepository = async () => {
+export const loginUserRepository = () => {
   // 変数はclassでいうところのコンストラクタで設定するイメージ
   const appDataSource = AppDataSource
 

@@ -1,8 +1,7 @@
+import { loginUserRepository } from '@/infrastructure/master/loginUserRepository'
 import express, { Request, Response, NextFunction } from 'express'
-// import { LoginloginUser } from '../../domain-model/entity/auth/LoginloginUser'
 
-// loginUserApiController
-export default () => {
+export const loginUserApiController = () => {
   const router = express.Router()
 
   // middleware that is specific to this router
@@ -12,7 +11,7 @@ export default () => {
   })
 
   // GET /api/loginUsers
-  router.get('/', async (request: Request<number>, response: Response, next: NextFunction) => {
+  router.get('/', async (request: Request<string>, response: Response, next: NextFunction) => {
     // Requestのvalidation実施
 
     // 例外処理
