@@ -2,7 +2,7 @@ import express, { Request, Response, NextFunction } from 'express'
 import bcrypt from 'bcrypt'
 import { sign } from 'jsonwebtoken'
 
-// AuthApiController
+// authApiController
 export default () => {
   const router = express.Router()
 

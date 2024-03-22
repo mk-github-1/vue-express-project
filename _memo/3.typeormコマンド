@@ -7,15 +7,15 @@ TypeORM 0.3系のマイグレーション
 
 
 ■ 1.generate entityからマイグレーションファイル作成 ※DB定義のファイル(新規 or 差分)
-> npm run typeorm migration:generate -- --dataSource data-source.ts --pretty migrations/migration
+> npm run typeorm migration:generate -- --dataSource ./src/data-source.ts --pretty migrations/migration
 or
-> npx typeorm-ts-node-commonjs migration:generate -d data-source.ts ./migrations/migration
+> npx typeorm-ts-node-commonjs migration:generate -d ./src/data-source.ts ./migrations/migration
 
 
 ■ 2.run マイグレーション実行
-> npm run typeorm migration:run -- --dataSource data-source.ts
+> npm run typeorm migration:run -- --dataSource ./src/data-source.ts
 or
-> npx typeorm-ts-node-commonjs migration:run -d data-source.ts
+> npx typeorm-ts-node-commonjs migration:run -d ./src/data-source.ts
 
 
 ■ 3. 差分更新の方法

@@ -2,10 +2,10 @@
 import express from 'express'
 
 // 1.auth
-import AuthApiController from './api/auth/AuthApiController'
+import authApiController from './api/auth/authApiController2'
 
 // 2.master
-import LoginUserApiController from './api/master/LoginUserApiController'
+import loginUserApiController from './api/master/loginUserApiController'
 
 // 3.transaction
 
@@ -15,10 +15,10 @@ export default () => {
   // ルート名は複数系にする
 
   // 1.auth
-  router.use('/auths', AuthApiController())
+  router.use('/auths', authApiController())
 
   // 2.master
-  router.use('/loginUsers', LoginUserApiController())
+  router.use('/loginUsers', loginUserApiController())
   // (例)
   // router.use("/groups", groupApiController());
 

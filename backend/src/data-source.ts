@@ -1,9 +1,9 @@
 // ■ 追加: TypeORM設定
 import 'reflect-metadata'
 import { DataSource } from 'typeorm'
-import { LoginUser } from './src/domain-model/entity/auth/LoginUser'
-import { LoginUserRole } from './src/domain-model/entity/auth/LoginUserRole'
-import { Role } from './src/domain-model/entity/auth/Role'
+import { LoginUser } from './domain-model/entity/auth/LoginUser'
+import { LoginUserRole } from './domain-model/entity/auth/LoginUserRole'
+import { Role } from './domain-model/entity/auth/Role'
 
 export const AppDataSource = new DataSource({
   // 1.利用するデータベース
@@ -12,7 +12,7 @@ export const AppDataSource = new DataSource({
   // port: "", // mysqlは3306、postresqlは5423、sqliteは不要
   // username: "", // 任意、sqliteは不要
   // password: "", // 任意、sqliteは不要
-  database: './data/data.db',　 // mysql, postgresqlはデータベース名
+  database: './data/data.db', // mysql, postgresqlはデータベース名
 
   // 2.Entityクラス
   entities: [

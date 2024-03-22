@@ -3,7 +3,6 @@ import {
   PrimaryColumn,
   PrimaryGeneratedColumn,
   Column,
-  DeleteDateColumn,
   CreateDateColumn,
   UpdateDateColumn,
   OneToOne,
@@ -11,15 +10,13 @@ import {
   OneToMany,
   JoinColumn
 } from 'typeorm'
-import { LoginUserRole } from './LoginUserRole'
+// import { LoginUserRole } from './LoginUserRole'
 
 /**
- * LoginUser: ログインユーザー
+ * LoginUserModel: ログインユーザー
  *
  */
-// @Entity('login_user')
-@Entity()
-export class LoginUser {
+export class LoginUserModel {
   constructor(data: {
     account: string
     username: string
@@ -32,7 +29,7 @@ export class LoginUser {
     isDeleted: boolean
     createdAt: Date
     updatedAt: Date
-    loginUserRole: LoginUserRole[]
+    // loginUserRole: LoginUserRole[]
   }) {
     this.account = data ? data.account : ''
     this.username = data ? data.username : ''
@@ -48,63 +45,37 @@ export class LoginUser {
     this.createdAt = data ? data.createdAt : new Date()
     this.updatedAt = data ? data.updatedAt : new Date()
 
-    this.loginUserRoles = data ? data.loginUserRole : []
+    // this.loginUserRoles = data ? data.loginUserRole : []
   }
 
-  @PrimaryColumn({ length: 256 })
   public readonly account: string = ''
 
-  @Column({ length: 256 })
   public readonly username: string = ''
 
-  @Column({ length: 256 })
   public password: string = ''
 
   // アカウントが有効かどうかを示すフラグ
-  @Column()
   public enabled: boolean = false
 
   // アカウントの有効期限が切れているかどうかを示すフラグ
-  @Column()
   public accountNonExpired: boolean = false
 
   // 資格情報の有効期限が切れているかどうかを示すフラグ
-  @Column()
   public accountNonLocked: boolean = false
 
   // アカウントがロックされているかどうかを示すフラグ
-  @Column()
   public credentialsNonExpired: boolean = false
 
-  @Column()
   public sortOrder: number = 0
 
-  @DeleteDateColumn()
   public isDeleted: boolean = false
 
-  /*
-  @Column({
-    // type: 'timestamptz',
-    default: () => 'CURRENT_TIMESTAMP'
-  })
-   */
-  @CreateDateColumn()
   public createdAt: Date = new Date()
 
-  @UpdateDateColumn()
   public updatedAt: Date = new Date()
 
   // ユーザーが持つ権限のリスト
-  @OneToMany(() => LoginUserRole, (loginUserRole) => loginUserRole.loginUser, {
-    createForeignKeyConstraints: false,
-    persistence: false
-    // cascade: true,
-    // eager: true,
-    // onDelete: 'CASCADE'
-  })
-  @JoinColumn({
-    name: 'account',
-    referencedColumnName: 'account'
-  })
+  /*
   public loginUserRoles: LoginUserRole[]
+   */
 }

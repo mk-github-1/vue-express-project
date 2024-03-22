@@ -3,6 +3,7 @@ import {
   PrimaryColumn,
   PrimaryGeneratedColumn,
   Column,
+  DeleteDateColumn,
   CreateDateColumn,
   UpdateDateColumn,
   OneToOne,
@@ -50,7 +51,7 @@ export class LoginUserRole {
   @Column()
   public sortOrder: number = 0
 
-  @Column()
+  @DeleteDateColumn()
   public isDeleted: boolean = false
 
   @CreateDateColumn()

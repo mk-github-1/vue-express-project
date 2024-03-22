@@ -13,7 +13,7 @@ import logger from 'morgan'
 import routes from './routes'
 import { CustomException } from './domain-model/CustomException'
 import { getErrorMessage } from './error'
-import { AppDataSource } from '../data-source'
+import { AppDataSource } from './data-source'
 
 // ■ 削除: APIとして利用するため
 // var indexRouter = require("./routes/index");
@@ -61,14 +61,14 @@ app.listen(port, () => {
   console.log(`Server is running on port ${port}`)
 })
 
+// データベース接続を確立する
 app.listen(port, () => {
-  // データベース接続を確立する
   try {
-    AppDataSource.initialize();
-    console.log("Data Source has been initialized!");
+    AppDataSource.initialize()
+    console.log('Data Source has been initialized!')
   } catch (error: any) {
-    console.error("Error during Data Source initialization:", error);
-    throw error;
+    console.error('Error during Data Source initialization:', error)
+    throw error
   }
 })
 
