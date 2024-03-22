@@ -2,7 +2,7 @@
 import express from 'express'
 
 // 1.auth
-import authApiController from './api/auth/authApiController2'
+import authApiController from './api/auth/authApiController'
 
 // 2.master
 import loginUserApiController from './api/master/loginUserApiController'
