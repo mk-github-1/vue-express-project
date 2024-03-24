@@ -7,12 +7,12 @@
 // var cookieParser = require('cookie-parser');
 // var logger = require('morgan');
 import express, { Request, Response, NextFunction } from 'express'
-import createError from 'http-errors'
+// import createError from 'http-errors'
 import cookieParser from 'cookie-parser'
 import logger from 'morgan'
-import routes from './routes'
-import { CustomException } from './domain-model/CustomException'
-import { getErrorMessage } from './error'
+import routes from './infrastructure/router'
+import { CustomException } from './domain/utility/error/CustomException'
+import { getHttpStatusCodeMessage } from './domain/utility/error/getHttpStatusCodeMessage'
 import { AppDataSource } from './data-source'
 
 // ■ 削除: APIとして利用するため
@@ -33,36 +33,41 @@ app.use(cookieParser())
 // app.use("/", indexRouter);
 // app.use("/users", usersRouter);
 
+// ■ 追加: API用ルーターをマウント
+app.use('/api', routes())
+
 // ■ 追加: APIアクセス用のルートハンドラ
 app.get('/api', (request: Request, response: Response, nextFunction: NextFunction) => {
   response.json({ message: '200 OK' })
 })
 
-// ■ 追加: API用ルーターをマウント
-app.use('/api', routes())
-
-// ■ 追加: 共通の例外時のエラー処理
-app.use(
-  (error: CustomException, request: Request, response: Response, nextFunction: NextFunction) => {
-    const httpStatusCode = (error as CustomException).httpStatusCode || 500
-    const message = getErrorMessage(httpStatusCode)
-
-    // ログ出力（任意）
-    console.error(error.stack)
-
-    // エラーレスポンスをjsonデータで返す
-    response.status(httpStatusCode).json({ message })
-  }
-)
-
-// ■ 追加: ポート設定がなかったので追加、これで起動できる
-const port = process.env.PORT || 3000
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`)
+// ■ 追加: 共通の成功時の処理
+app.use((request: Request, response: Response, next: NextFunction) => {
+  response.status(200).json({ message: '200 OK' })
 })
 
-// データベース接続を確立する
-app.listen(port, () => {
+// ■ 追加: 共通の例外時の処理
+app.use((error: CustomException, request: Request, response: Response, nextFunction: NextFunction) => {
+  const httpStatusCode = (error as CustomException).httpStatusCode || 500
+  const message = getHttpStatusCodeMessage(httpStatusCode)
+
+  // ログ出力（任意）
+  console.error(error.stack)
+
+  // エラーレスポンスをjsonデータで返す
+  response.status(httpStatusCode).json({ message: message })
+})
+
+// ■ 追加: ポート設定がなかったので追加、これで起動できる
+// const port = 5000 // process.env.PORT ||
+app.listen(3000, () => {
+  // console.log(`Server is running on port ${port}`)
+  console.log(`Server is running on port 3000`)
+})
+
+// ■ 追加: データベース接続を確立する
+/*
+app.listen(5000, () => {
   try {
     AppDataSource.initialize()
     console.log('Data Source has been initialized!')
@@ -71,5 +76,5 @@ app.listen(port, () => {
     throw error
   }
 })
-
+ */
 module.exports = app

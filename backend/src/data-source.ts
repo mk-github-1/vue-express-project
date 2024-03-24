@@ -1,9 +1,9 @@
-// ■ 追加: TypeORM設定
+// TypeORM設定
 import 'reflect-metadata'
 import { DataSource } from 'typeorm'
-import { LoginUser } from './domain-model/entity/auth/LoginUser'
-import { LoginUserRole } from './domain-model/entity/auth/LoginUserRole'
-import { Role } from './domain-model/entity/auth/Role'
+import { LoginUserEntity } from './infrastructure/entity/auth/LoginUserEntity'
+import { LoginUserRoleEntity } from './infrastructure/entity/auth/LoginUserRoleEntity'
+import { RoleEntity } from './infrastructure/entity/auth/RoleEntity'
 
 export const AppDataSource = new DataSource({
   // 1.利用するデータベース
@@ -17,9 +17,9 @@ export const AppDataSource = new DataSource({
   // 2.Entityクラス
   entities: [
     // auth
-    LoginUser,
-    LoginUserRole,
-    Role
+    LoginUserEntity,
+    LoginUserRoleEntity,
+    RoleEntity
 
     // master
 

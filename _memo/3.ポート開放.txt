@@ -1,0 +1,6 @@
+
+Get-NetTCPConnection
+
+Get-NetTCPConnection -State Listen
+
+Get-NetTCPConnection -State Listen | Select-Object -Property LocalPort, State 
