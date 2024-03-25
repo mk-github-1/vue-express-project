@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import { injectable, inject } from 'inversify'
 import { CustomException } from '@/domain/utility/error/CustomException'
 import { ILoginUserRepository } from '@/domain/auth/LoginUser/ILoginUserRepository'
