@@ -5,12 +5,11 @@ import { AuthenticationDto } from '@/application/auth/Authentication/Authenticat
 import { ILoginUserRepository } from '@/domain/auth/LoginUser/ILoginUserRepository'
 import { LoginUserDto } from '@/application/auth/LoginUser/LoginUserDto'
 
-// @injectable()
+@injectable()
 export class AuthenticationService implements IAuthenticationService {
   private loginUserRepository: ILoginUserRepository
 
-  // @inject('LoginUserRepository')
-  constructor(loginUserRepository: ILoginUserRepository) {
+  constructor(@inject('LoginUserRepository')loginUserRepository: ILoginUserRepository) {
     this.loginUserRepository = loginUserRepository
   }
 
