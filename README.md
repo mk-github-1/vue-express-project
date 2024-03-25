@@ -41,7 +41,7 @@ js である
 ## プロジェクト構成
 | | | | | | |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| vue-express-project | | | | | |
+| vue-express-project |
 | |- backend | | | | |
 | | |- config | | | |
 | | | |- inversify.config.ts | | |
