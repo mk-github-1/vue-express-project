@@ -5,7 +5,7 @@ import { ILoginUserRepository } from '@/domain/auth/LoginUser/ILoginUserReposito
 import { LoginUserEntity } from '@/infrastructure/entity/auth/LoginUserEntity'
 import { LoginUserDto } from '@/application/auth/LoginUser/LoginUserDto'
 
-@injectable()
+// @injectable()
 export class LoginUserRepository implements ILoginUserRepository {
   private appDataSource = AppDataSource
 

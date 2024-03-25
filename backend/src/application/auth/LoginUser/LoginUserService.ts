@@ -9,8 +9,7 @@ import { LoginUserDto } from '@/application/auth/LoginUser/LoginUserDto'
 export class LoginUserService implements ILoginUserService {
   private loginUserRepository: ILoginUserRepository
 
-  // @inject('LoginUserRepository')
-  constructor(loginUserRepository: ILoginUserRepository) {
+  constructor(/* @inject('LoginUserRepository')*/ loginUserRepository: ILoginUserRepository) {
     this.loginUserRepository = loginUserRepository
   }
 

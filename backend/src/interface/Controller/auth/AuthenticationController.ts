@@ -3,15 +3,14 @@ import { Request, Response, NextFunction } from 'express'
 import { injectable, inject } from 'inversify'
 import bcrypt from 'bcrypt'
 import { sign } from 'jsonwebtoken'
-import { IAuthenticationService } from '@/application/auth/Authentication/IAuthenticationServiceService'
+import { IAuthenticationService } from '@/application/auth/Authentication/IAuthenticationService'
 import { AuthenticationDto } from '@/application/auth/Authentication/AuthenticationDto'
 
 // @injectable()
 export class AuthenticationController {
   private authenticationService: IAuthenticationService
 
-  // @inject('AuthenticationService')
-  constructor(authenticationService: IAuthenticationService) {
+  constructor(/* @inject('AuthenticationService') */ authenticationService: IAuthenticationService) {
     this.authenticationService = authenticationService
   }
 

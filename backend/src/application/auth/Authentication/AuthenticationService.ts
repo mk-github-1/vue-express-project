@@ -1,16 +1,16 @@
 import 'reflect-metadata'
 import { injectable, inject } from 'inversify'
 import { CustomException } from '@/domain/utility/error/CustomException'
-import { IAuthenticationService } from '@/application/auth/Authentication/IAuthenticationServiceService'
+import { IAuthenticationService } from '@/application/auth/Authentication/IAuthenticationService'
 import { AuthenticationDto } from '@/application/auth/Authentication/AuthenticationDto'
 import { ILoginUserRepository } from '@/domain/auth/LoginUser/ILoginUserRepository'
 import { LoginUserDto } from '@/application/auth/LoginUser/LoginUserDto'
 
-@injectable()
+// @injectable()
 export class AuthenticationService implements IAuthenticationService {
   private loginUserRepository: ILoginUserRepository
 
-  constructor(@inject('LoginUserRepository')loginUserRepository: ILoginUserRepository) {
+  constructor(/* @inject('LoginUserRepository')*/ loginUserRepository: ILoginUserRepository) {
     this.loginUserRepository = loginUserRepository
   }
 
