@@ -58,7 +58,3 @@ container.bind<Connection>('AppDataSource').toDynamicValue(appDataSourceFactory)
   );
  */
 export const container = rootContainer.createChild()
-function createDataSource() {
-  throw new Error('Function not implemented.')
-}
-
