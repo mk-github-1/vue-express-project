@@ -9,6 +9,7 @@ Vue3 (create-vue) と Express.js で構成した Web アプリのテンプレー
 ・./vscode/launch.jsonの設定で、VS Codeのデバッグ機能を利用して実行できる。
 
 準備中、backendはまだデバッグで停止しない
+GitHub上にゴミフォルダが残っている
 
 (backend)
 ・初心者にもわかりやすいものを作成する
