@@ -4,13 +4,13 @@ import { TYPES } from '@/config/inversify/types'
 import { DataSource } from 'typeorm'
 import { AppDataSource } from '@/data-source'
 
-// import { IAuthenticationService } from '@/application/auth/Authentication/IAuthenticationService'
+import { IAuthenticationService } from '@/application/auth/Authentication/IAuthenticationService'
 import { AuthenticationService } from '@/application/auth/Authentication/AuthenticationService'
 import { AuthenticationController } from '@/interface/Controller/auth/AuthenticationController'
 
-// import { ILoginUserRepository } from '@/domain/auth/LoginUser/ILoginUserRepository'
+import { ILoginUserRepository } from '@/domain/auth/LoginUser/ILoginUserRepository'
 import { LoginUserRepository } from '@/infrastructure/repository/auth/LoginUser/LoginUserRepository'
-// import { ILoginUserService } from '@/application/auth/LoginUser/ILoginUserService'
+import { ILoginUserService } from '@/application/auth/LoginUser/ILoginUserService'
 import { LoginUserService } from '@/application/auth/LoginUser/LoginUserService'
 import { LoginUserController } from '@/interface/Controller/auth/LoginUserController'
 
@@ -22,16 +22,16 @@ const rootContainer = new Container()
 /* auth **************************************************/
 
 // Authenticate
+rootContainer.bind<AuthenticationService>(TYPES.AuthenticationService).to(AuthenticationService).inSingletonScope()
 rootContainer
   .bind<AuthenticationController>(TYPES.AuthenticationController)
   .to(AuthenticationController)
   .inSingletonScope()
-rootContainer.bind<AuthenticationService>(TYPES.AuthenticationService).to(AuthenticationService).inSingletonScope()
 
 // LoginUser
-rootContainer.bind<LoginUserController>(TYPES.LoginUserController).to(LoginUserController).inSingletonScope()
-rootContainer.bind<LoginUserService>(TYPES.LoginUserService).to(LoginUserService).inSingletonScope()
 rootContainer.bind<LoginUserRepository>(TYPES.LoginUserRepository).to(LoginUserRepository).inSingletonScope()
+rootContainer.bind<LoginUserService>(TYPES.LoginUserService).to(LoginUserService).inSingletonScope()
+rootContainer.bind<LoginUserController>(TYPES.LoginUserController).to(LoginUserController).inSingletonScope()
 
 /* master **************************************************/
 
