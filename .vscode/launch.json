@@ -12,7 +12,8 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
       "console": "integratedTerminal",
-      "skipFiles": ["<node_internals>/**"]
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true
     },
     {
       "name": "frontend-debug",
@@ -34,7 +35,8 @@
       },
       "console": "integratedTerminal",
       "skipFiles": ["<node_internals>/**"],
-      "restart": true
+      "restart": true,
+      "sourceMaps": true
       // "internalConsoleOptions": "neverOpen",
     }
   ],

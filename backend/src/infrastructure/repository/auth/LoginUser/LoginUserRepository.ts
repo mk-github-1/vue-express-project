@@ -1,6 +1,7 @@
 import 'reflect-metadata'
 import { injectable, inject } from 'inversify'
 import { TYPES } from '@/config/inversify/types'
+import { DataSource } from 'typeorm'
 import { AppDataSource } from '@/data-source'
 import { ILoginUserRepository } from '@/domain/auth/LoginUser/ILoginUserRepository'
 import { LoginUserEntity } from '@/infrastructure/entity/auth/LoginUserEntity'
@@ -8,15 +9,18 @@ import { LoginUserDto } from '@/application/auth/LoginUser/LoginUserDto'
 
 @injectable()
 export class LoginUserRepository implements ILoginUserRepository {
-  private appDataSource = AppDataSource
+  private appDataSource: DataSource
 
-  /*
-  private appDataSource: IAppDataSource
-
-  constructor(@inject(TYPES.AppDataSource) appDataSource: IAppDataSource) {
+  constructor(@inject(TYPES.DataSource) appDataSource: DataSource) {
     this.appDataSource = appDataSource
+
+    this.find = this.find.bind(this)
+    this.findOne = this.findOne.bind(this)
+    this.create = this.create.bind(this)
+    this.update = this.update.bind(this)
+    this.delete = this.delete.bind(this)
+    this.sort = this.sort.bind(this)
   }
-   */
 
   // データ取得 (複数件 or 1件)
   async find(): Promise<LoginUserDto[]> {

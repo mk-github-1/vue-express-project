@@ -17,7 +17,17 @@ import { LoginUserController } from '@/interface/Controller/auth/LoginUserContro
 // 実際の依存関係を追加する ※基本的にシングルトンスコープにする、他の設定にする場合は構築しながら調査
 const container = new Container()
 
-// container.bind<"取得する時の型">("識別子").to("登録対象クラス")
+// container.bind<"取得する時の型(インタフェース or クラス)">("識別子").to("対象クラス")
+
+/* AppDataSource **************************************************/
+container.bind<DataSource>(TYPES.DataSource).toConstantValue(AppDataSource)
+
+// 本番環境と開発環境でデータストアを切り替えるサンプル
+/*
+  container.bind<DatabaseInterface>(TYPES.DataSource).toConstantValue(
+    process.env.NODE_ENV === 'production' ? new DocDB() : new Mongo()
+  );
+ */
 
 /* auth **************************************************/
 
@@ -36,22 +46,4 @@ container.bind<LoginUserController>(TYPES.LoginUserController).to(LoginUserContr
 
 /* transaction(etc) **************************************************/
 
-/* AppDataSource **************************************************/
-/*
-const dataSource = createDataSource(appDataSource);
-container.bind<DataSource>('DataSource').toConstantValue(dataSource);
- */
-/*
-const appDataSourceFactory = async (): Promise<Connection> => {
-  return createConnection(connection options)
-}
-container.bind<Connection>('AppDataSource').toDynamicValue(appDataSourceFactory).inSingletonScope()
- */
-
-// 本番環境と開発環境でデータストアを切り替えるサンプル
-/*
-  container.bind<DatabaseInterface>(TYPES.AppDataSource).toConstantValue(
-    process.env.NODE_ENV === 'production' ? new DocDB() : new Mongo()
-  );
- */
 export { container } // .createChild()

@@ -11,6 +11,11 @@ export class LoginUserController /* implements IGenericController */ {
 
   constructor(@inject(TYPES.LoginUserService) loginUserService: ILoginUserService) {
     this.loginUserService = loginUserService
+
+    this.get = this.get.bind(this)
+    this.post = this.post.bind(this)
+    this.patch = this.patch.bind(this)
+    this.delete = this.delete.bind(this)
   }
 
   // GET

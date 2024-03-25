@@ -13,6 +13,10 @@ export class AuthenticationService implements IAuthenticationService {
 
   constructor(@inject(TYPES.LoginUserRepository) loginUserRepository: ILoginUserRepository) {
     this.loginUserRepository = loginUserRepository
+
+    this.findOne = this.findOne.bind(this)
+    this.create = this.create.bind(this)
+    this.update = this.update.bind(this)
   }
 
   async findOne(keys: string[]): Promise<AuthenticationDto> {

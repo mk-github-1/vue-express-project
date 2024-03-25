@@ -12,6 +12,13 @@ export class LoginUserService implements ILoginUserService {
 
   constructor(@inject(TYPES.LoginUserRepository) loginUserRepository: ILoginUserRepository) {
     this.loginUserRepository = loginUserRepository
+
+    this.find = this.find.bind(this)
+    this.findOne = this.findOne.bind(this)
+    this.create = this.create.bind(this)
+    this.update = this.update.bind(this)
+    this.delete = this.delete.bind(this)
+    this.sort = this.sort.bind(this)
   }
 
   async find(): Promise<LoginUserDto[]> {

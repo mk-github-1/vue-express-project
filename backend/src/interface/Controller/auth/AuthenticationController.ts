@@ -13,6 +13,10 @@ export class AuthenticationController {
 
   constructor(@inject(TYPES.AuthenticationService) authenticationService: IAuthenticationService) {
     this.authenticationService = authenticationService
+
+    this.get = this.get.bind(this)
+    this.post = this.post.bind(this)
+    this.patch = this.patch.bind(this)
   }
 
   // GET
