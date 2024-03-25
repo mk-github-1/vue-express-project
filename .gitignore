@@ -33,4 +33,4 @@ test-results/
 playwright-report/
 
 # sqlite3
-data.db
+# data.db

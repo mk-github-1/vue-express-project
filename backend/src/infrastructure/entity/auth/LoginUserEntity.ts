@@ -3,7 +3,7 @@ import {
   PrimaryColumn,
   PrimaryGeneratedColumn,
   Column,
-  DeleteDateColumn,
+  // DeleteDateColumn,
   CreateDateColumn,
   UpdateDateColumn,
   OneToOne,
@@ -75,7 +75,7 @@ export class LoginUserEntity {
   @Column({ unsigned: true })
   public sortOrder: number = 0
 
-  @DeleteDateColumn()
+  @Column()
   public isDeleted: boolean = false
 
   @CreateDateColumn()
