@@ -19,7 +19,7 @@ const container = new Container()
 
 // container.bind<"取得する時の型(インタフェース or クラス)">("識別子").to("対象クラス")
 
-/* AppDataSource **************************************************/
+/* AppDataSourceをDIコンテナに登録 **************************************************/
 container.bind<DataSource>(TYPES.DataSource).toConstantValue(AppDataSource)
 
 // 本番環境と開発環境でデータストアを切り替えるサンプル
