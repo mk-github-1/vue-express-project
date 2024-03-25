@@ -40,120 +40,132 @@ js である
 
 ## プロジェクト構成
 | | | | | | |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| vue-express-project | | | | | |
-| |- backend | | | | |
-| | |- config | | | |
-| | | |- inversify.config.ts | | |
-| | | |- Types.ts | | |
-| | |- domain : 1.ドメイン層 | | | |
-| | | |- auth | | |
-| | | | |- LoginUser | |
-| | | | |- ILoginUserRepository.ts | |
-| | | | |- LoginUser.ts | |
-| | | | |- LoginUserLogic.ts | |
-| | | |- constant | | |
-| | | |- master | | |
-| | | |- transaction | | |
-| | |- utility | | | |
-| | | |- error : Express.js での backend のエラー処理を共通化 | | |
-| | | | |- CustomException.ts | |
-| | | | |- getHttpStatusCodeMessage.ts | |
-| | | |- generic-interface : メソッド名を共通化するためだけの共通インタフェース | | |
-| | | | |- IGenericController.ts | |
-| | | | |- IGenericService.ts | |
-| | | | |- IGenericRepository.ts | |
-| | | | | | |
-| | |- infrastructure : 3-2.インフラストラクチャー層 | | | |
-| | | |- entity : TypeORM の Entity = DB のテーブル | | |
-| | | | |- auth | |
-| | | | | |- LoginUserEntity.ts |
-| | | | | |- LoginUserRoleEntity.ts |
-| | | | | |- RikeEntity.ts |
-| | | | |- master | |
-| | | | |- transaction | |
-| | | | | | |
-| | | |- repository | | |
-| | | | |- auth | |
-| | | | | |- LoginUser |
-| | | | | |- ILoginUserRepository.ts |
-| | | | |- master | |
-| | | | |- transaction | |
-| | | | | | |
-| | |- router : ルーター(API エンドポイント)の設定 | | |
-| | | |- auth | | |
-| | | | |- authenticationRouter.ts | |
-| | | | |- loginUserRouter.ts | |
-| | | |- master | | |
-| | | |- transaction | | |
-| | | |- index.ts : ルーター本体 | | |
-| | | | | | |
-| | |- interface : 3-1.インタフェース層(コントローラー) | | | |
-| | | |- controller | | |
-| | | | |- auth | |
-| | | | | |- AuthenticationController.ts |
-| | | | | |- LoginUserController.ts |
-| | | | |- master | |
-| | | | |- transaction | |
-| | | | | | |
-| | |- data-source.ts : TypeORM 設定 | | | |
-| | |- index.ts : アプリケーション実行本体(Express.js) | | | |
-| | | | | | |
-| |- tests : ※後で | | | | |
-| | | | | | |
-| |- TypeORM_command.txt : TypeORM コマンドで使用するコマンド | | | | |
-| |- .eslintrc.cjs : ESLint 設定 (構文チェック) | | | | |
-| |- .prettierrc.json : prettier 設定 (コード整形) | | | | |
-| |- package-lock.json | | | | |
-| |- package.json : npm 設定、利用パッケージ | | | | |
-| |- tsconfig.json : TypeScript 設定 | | | | |
-| | | | | | |
-|- frontend | | | | | |
-| |- .vscode : Vue デフォルト | | | | |
-| |- e2e : Vue デフォルト | | | | |
-| |- node_modules : npm でインストールした node モジュール(関連モジュールも入る) | | | | |
-| |- public | | | | |
-| | |- favicon.ico | | | |
-| |- src | | | | |
-| | |- assets | | | |
-| | | |- scss | | |
-| | | | |- bootstrap-custom.scss | |
-| | | |- base.css | | |
-| | | |- logo.svg | | |
-| | | |- main.css | | |
-| | |- components | | | |
-| | |- router : ルーターの設定 | | | |
-| | | |- index.ts | | |
-| | |- stores : ストアの設定 | | | |
-| | | |- counter.ts | | |
-| | |- views : 画面の設定 | | | |
-| | | |- common | | |
-| | | | |- FooterView.tsx | |
-| | | | |- HeaderView.tsx | |
-| | | | |- SidebarView.tsx | |
-| | | |- AboutView.tsx | | |
-| | | |- HomeView.tsx | | |
-| | |- App.tsx : メイン画面 | | | |
-| | |- main.ts : アプリケーション実行本体(Vue.js) | | | |
-| | | | | | |
-| | |- tests | | | |
-| | | | | | |
-| |- .eslintrc.cjs : ESLint 設定 (構文チェック) | | | | |
-| |- .prettierrc.json : prettier 設定 (コード整形) | | | | |
-| |- env.d.ts | | | | |
-| |- index.html | | | | |
-| |- package-lock.json | | | | |
-| |- package.json : npm 設定、利用パッケージ | | | | |
-| |- playwright.config.ts | | | | |
-| |- tsconfig.app.json | | | | |
-| |- tsconfig.json : TypeScript メイン設定 | | | | |
-| |- tsconfig.node.json | | | | |
-| |- tsconfig.vitest.json | | | | |
-| |- vite.config.ts : Vite メイン設定 | | | | |
-| |- vitest.config.ts | | | | |
-| | | | | | |
-|- .gitattributes | | | | | |
-|- .gitignore | | | | | |
-|- LISENSE | | | | | |
-|- README.md | | | | | |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| vue-express-project | | | | | | |
+| |- backend | | | | | |
+| | |- config | | | | |
+| | | |- inversify.config.ts | | | |
+| | | |- Types.ts | | | |
+| | |- application : 2.アプリケーション | | | | |
+| | | |- auth | | | |
+| | | | |- Authentication | | |
+| | | | | |- AuthenticationDto.ts | |
+| | | | | |- AuthenticationService.ts | |
+| | | | | |- IAuthenticationService.ts | |
+| | | | |- LoginUser | | |
+| | | | | |- ILoginUserService.ts | |
+| | | | | |- LoginUserDto.ts | |
+| | | | | |- LoginUserService.ts | |
+| | | |- master | | | |
+| | | |- transaction | | | |
+| | |- domain : 1.ドメイン層 | | | | |
+| | | |- auth | | | |
+| | | | |- LoginUser | | |
+| | | | | |- ILoginUserRepository.ts | |
+| | | | | |- LoginUser.ts | |
+| | | | | |- LoginUserLogic.ts | |
+| | | |- constant | | | |
+| | | |- master | | | |
+| | | |- transaction | | | |
+| | |- utility | | | | |
+| | | |- error : Express.js での backend のエラー処理を共通化 | | | |
+| | | | |- CustomException.ts | | |
+| | | | |- getHttpStatusCodeMessage.ts | | |
+| | | |- generic-interface : メソッド名を共通化するためだけの共通インタフェース | | | |
+| | | | |- IGenericController.ts | | | |
+| | | | |- IGenericService.ts | | |
+| | | | |- IGenericRepository.ts | | |
+| | | | | | | |
+| | |- infrastructure : 3-2.インフラストラクチャー層 | | | | |
+| | | |- entity : TypeORM の Entity = DB のテーブル | | | |
+| | | | |- auth | | |
+| | | | | |- LoginUserEntity.ts | |
+| | | | | |- LoginUserRoleEntity.ts | |
+| | | | | |- RoleEntity.ts | |
+| | | | |- master | | |
+| | | | |- transaction | | |
+| | | | | | | |
+| | | |- repository | | | |
+| | | | |- auth | | |
+| | | | | |- LoginUser | |
+| | | | | | |- ILoginUserRepository.ts |
+| | | | |- master | | |
+| | | | |- transaction | | |
+| | | | | | | |
+| | |- router : ルーター(API エンドポイント)の設定 | | | | |
+| | | |- auth | | | |
+| | | | |- authenticationRouter.ts | | |
+| | | | |- loginUserRouter.ts | | |
+| | | |- master | | | |
+| | | |- transaction | | | |
+| | | |- index.ts : ルーター本体 | | | |
+| | | | | | | |
+| | |- interface : 3-1.インタフェース層(コントローラー) | | | | |
+| | | |- controller | | | |
+| | | | |- auth | | |
+| | | | | |- AuthenticationController.ts | |
+| | | | | |- LoginUserController.ts | |
+| | | | |- master | | |
+| | | | |- transaction | | |
+| | | | | | | |
+| | |- data-source.ts : TypeORM 設定 | | | | |
+| | |- index.ts : アプリケーション実行本体(Express.js) | | | | |
+| | | | | | | |
+| |- tests : ※後で | | | | | |
+| | | | | | | |
+| |- TypeORM_command.txt : TypeORM コマンドで使用するコマンド | | | | | |
+| |- .eslintrc.cjs : ESLint 設定 (構文チェック) | | | | | |
+| |- .prettierrc.json : prettier 設定 (コード整形) | | | | | |
+| |- package-lock.json | | | | | |
+| |- package.json : npm 設定、利用パッケージ | | | | | |
+| |- tsconfig.json : TypeScript 設定 | | | | | |
+| | | | | | | |
+|- frontend | | | | | | |
+| |- .vscode : Vue デフォルト | | | | | |
+| |- e2e : Vue デフォルト | | | | | |
+| |- node_modules : npm でインストールした node モジュール(関連モジュールも入る) | | | | | |
+| |- public | | | | | |
+| | |- favicon.ico | | | | |
+| |- src | | | | | |
+| | |- assets | | | | |
+| | | |- scss | | | |
+| | | | |- bootstrap-custom.scss | | |
+| | | |- base.css | | | |
+| | | |- logo.svg | | | |
+| | | |- main.css | | | |
+| | |- components | | | | |
+| | |- router : ルーターの設定 | | | | |
+| | | |- index.ts | | | |
+| | |- stores : ストアの設定 | | | | |
+| | | |- counter.ts | | | |
+| | |- views : 画面の設定 | | | | |
+| | | |- common | | | |
+| | | | |- FooterView.tsx | | |
+| | | | |- HeaderView.tsx | | |
+| | | | |- SidebarView.tsx | | |
+| | | |- AboutView.tsx | | | |
+| | | |- HomeView.tsx | | | |
+| | |- App.tsx : メイン画面 | | | | |
+| | |- main.ts : アプリケーション実行本体(Vue.js) | | | | |
+| | | | | | | |
+| | |- tests | | | | |
+| | | | | | | |
+| |- .eslintrc.cjs : ESLint 設定 (構文チェック) | | | | | |
+| |- .prettierrc.json : prettier 設定 (コード整形) | | | | | |
+| |- env.d.ts | | | | | |
+| |- index.html | | | | | |
+| |- package-lock.json | | | | | |
+| |- package.json : npm 設定、利用パッケージ | | | | | |
+| |- playwright.config.ts | | | | | |
+| |- tsconfig.app.json | | | | | |
+| |- tsconfig.json : TypeScript メイン設定 | | | | | |
+| |- tsconfig.node.json | | | | | |
+| |- tsconfig.vitest.json | | | | | |
+| |- vite.config.ts : Vite メイン設定 | | | | | |
+| |- vitest.config.ts | | | | | |
+| | | | | | | |
+|- .gitattributes | | | | | | |
+|- .gitignore | | | | | | |
+|- LISENSE | | | | | | |
+|- README.md | | | | | | |
 
