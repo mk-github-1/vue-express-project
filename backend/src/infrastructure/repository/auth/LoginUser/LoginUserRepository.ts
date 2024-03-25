@@ -1,5 +1,6 @@
 import 'reflect-metadata'
 import { injectable, inject } from 'inversify'
+import { TYPES } from '@/config/inversify/types'
 import { AppDataSource } from '@/data-source'
 import { ILoginUserRepository } from '@/domain/auth/LoginUser/ILoginUserRepository'
 import { LoginUserEntity } from '@/infrastructure/entity/auth/LoginUserEntity'
@@ -12,7 +13,7 @@ export class LoginUserRepository implements ILoginUserRepository {
   /*
   private appDataSource: IAppDataSource
 
-  constructor(@inject("IAppDataSource") appDataSource: IAppDataSource) {
+  constructor(@inject(TYPES.AppDataSource) appDataSource: IAppDataSource) {
     this.appDataSource = appDataSource
   }
    */

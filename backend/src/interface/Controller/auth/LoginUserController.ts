@@ -1,6 +1,7 @@
 import 'reflect-metadata'
 import { Request, Response, NextFunction } from 'express'
 import { injectable, inject } from 'inversify'
+import { TYPES } from '@/config/inversify/types'
 import { ILoginUserService } from '@/application/auth/LoginUser/ILoginUserService'
 import { LoginUserDto } from '@/application/auth/LoginUser/LoginUserDto'
 
@@ -8,7 +9,7 @@ import { LoginUserDto } from '@/application/auth/LoginUser/LoginUserDto'
 export class LoginUserController /* implements IGenericController */ {
   private loginUserService: ILoginUserService
 
-  constructor(@inject('LoginUserService') loginUserService: ILoginUserService) {
+  constructor(@inject(TYPES.LoginUserService) loginUserService: ILoginUserService) {
     this.loginUserService = loginUserService
   }
 

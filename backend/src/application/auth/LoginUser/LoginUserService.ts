@@ -1,5 +1,6 @@
 import 'reflect-metadata'
 import { injectable, inject } from 'inversify'
+import { TYPES } from '@/config/inversify/types'
 import { CustomException } from '@/domain/utility/error/CustomException'
 import { ILoginUserRepository } from '@/domain/auth/LoginUser/ILoginUserRepository'
 import { ILoginUserService } from '@/application/auth/LoginUser/ILoginUserService'
@@ -9,7 +10,7 @@ import { LoginUserDto } from '@/application/auth/LoginUser/LoginUserDto'
 export class LoginUserService implements ILoginUserService {
   private loginUserRepository: ILoginUserRepository
 
-  constructor(@inject('LoginUserRepository') loginUserRepository: ILoginUserRepository) {
+  constructor(@inject(TYPES.LoginUserRepository) loginUserRepository: ILoginUserRepository) {
     this.loginUserRepository = loginUserRepository
   }
 
