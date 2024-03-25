@@ -15,23 +15,20 @@ import { LoginUserService } from '@/application/auth/LoginUser/LoginUserService'
 import { LoginUserController } from '@/interface/Controller/auth/LoginUserController'
 
 // 実際の依存関係を追加する ※基本的にシングルトンスコープにする、他の設定にする場合は構築しながら調査
-const rootContainer = new Container()
+const container = new Container()
 
 // container.bind<"取得する時の型">("識別子").to("登録対象クラス")
 
 /* auth **************************************************/
 
 // Authenticate
-rootContainer.bind<IAuthenticationService>(TYPES.AuthenticationService).to(AuthenticationService).inSingletonScope()
-rootContainer
-  .bind<AuthenticationController>(TYPES.AuthenticationController)
-  .to(AuthenticationController)
-  .inSingletonScope()
+container.bind<IAuthenticationService>(TYPES.AuthenticationService).to(AuthenticationService).inSingletonScope()
+container.bind<AuthenticationController>(TYPES.AuthenticationController).to(AuthenticationController).inSingletonScope()
 
 // LoginUser
-rootContainer.bind<ILoginUserRepository>(TYPES.LoginUserRepository).to(LoginUserRepository).inSingletonScope()
-rootContainer.bind<ILoginUserService>(TYPES.LoginUserService).to(LoginUserService).inSingletonScope()
-rootContainer.bind<LoginUserController>(TYPES.LoginUserController).to(LoginUserController).inSingletonScope()
+container.bind<ILoginUserRepository>(TYPES.LoginUserRepository).to(LoginUserRepository).inSingletonScope()
+container.bind<ILoginUserService>(TYPES.LoginUserService).to(LoginUserService).inSingletonScope()
+container.bind<LoginUserController>(TYPES.LoginUserController).to(LoginUserController).inSingletonScope()
 
 /* master **************************************************/
 
@@ -42,7 +39,7 @@ rootContainer.bind<LoginUserController>(TYPES.LoginUserController).to(LoginUserC
 /* AppDataSource **************************************************/
 /*
 const dataSource = createDataSource(appDataSource);
-rootContainer.bind<DataSource>('DataSource').toConstantValue(dataSource);
+container.bind<DataSource>('DataSource').toConstantValue(dataSource);
  */
 /*
 const appDataSourceFactory = async (): Promise<Connection> => {
@@ -57,6 +54,4 @@ container.bind<Connection>('AppDataSource').toDynamicValue(appDataSourceFactory)
     process.env.NODE_ENV === 'production' ? new DocDB() : new Mongo()
   );
  */
-const container = rootContainer.createChild()
-
-export { container }
+export { container } // .createChild()

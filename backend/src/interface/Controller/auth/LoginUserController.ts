@@ -4,11 +4,11 @@ import { injectable, inject } from 'inversify'
 import { ILoginUserService } from '@/application/auth/LoginUser/ILoginUserService'
 import { LoginUserDto } from '@/application/auth/LoginUser/LoginUserDto'
 
-// @injectable()
+@injectable()
 export class LoginUserController /* implements IGenericController */ {
   private loginUserService: ILoginUserService
 
-  constructor(/* @inject('LoginUserService') */ loginUserService: ILoginUserService) {
+  constructor(@inject('LoginUserService') loginUserService: ILoginUserService) {
     this.loginUserService = loginUserService
   }
 

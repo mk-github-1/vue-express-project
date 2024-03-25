@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import express from 'express'
 // import { StatusCodes } from "http-status-codes";
 import { container } from '@/config/inversify/inversify.config'

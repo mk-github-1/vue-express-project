@@ -6,11 +6,11 @@ import { sign } from 'jsonwebtoken'
 import { IAuthenticationService } from '@/application/auth/Authentication/IAuthenticationService'
 import { AuthenticationDto } from '@/application/auth/Authentication/AuthenticationDto'
 
-// @injectable()
+@injectable()
 export class AuthenticationController {
   private authenticationService: IAuthenticationService
 
-  constructor(/* @inject('AuthenticationService') */ authenticationService: IAuthenticationService) {
+  constructor(@inject('AuthenticationService') authenticationService: IAuthenticationService) {
     this.authenticationService = authenticationService
   }
 

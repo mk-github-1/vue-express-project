@@ -5,11 +5,11 @@ import { ILoginUserRepository } from '@/domain/auth/LoginUser/ILoginUserReposito
 import { ILoginUserService } from '@/application/auth/LoginUser/ILoginUserService'
 import { LoginUserDto } from '@/application/auth/LoginUser/LoginUserDto'
 
-// @injectable()
+@injectable()
 export class LoginUserService implements ILoginUserService {
   private loginUserRepository: ILoginUserRepository
 
-  constructor(/* @inject('LoginUserRepository')*/ loginUserRepository: ILoginUserRepository) {
+  constructor(@inject('LoginUserRepository') loginUserRepository: ILoginUserRepository) {
     this.loginUserRepository = loginUserRepository
   }
 

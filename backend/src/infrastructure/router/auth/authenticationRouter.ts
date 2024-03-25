@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import express from 'express'
 import { container } from '@/config/inversify/inversify.config'
 import { TYPES } from '@/config/inversify/types'
@@ -9,9 +10,9 @@ export const authenticationRouter = () => {
 
   router
     .route('/')
-    .get(authenticationController.get.bind(AuthenticationController))
-    .post(authenticationController.post.bind(AuthenticationController))
-    .patch(authenticationController.patch.bind(AuthenticationController))
+    .get(authenticationController.get.bind(authenticationController))
+    .post(authenticationController.post.bind(authenticationController))
+    .patch(authenticationController.patch.bind(authenticationController))
 
   return router
 }
