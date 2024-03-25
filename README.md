@@ -42,9 +42,10 @@ js である
 | | | | | | |
 | :--- | :---: | ---: | :---: | ---: | ---: |
 | vue-express-project | | | | | |
-| | | | |- inversify.config.ts |  |
-| | | | |- Types.ts | |
-| | | | | |
+| |- backend | | | | |
+| | |- config | | | |
+| | | |- inversify.config.ts | | |
+| | | |- Types.ts | | |
 | | |- domain : 1.ドメイン層 | | | |
 | | | |- auth | | |
 | | | | |- LoginUser | |
