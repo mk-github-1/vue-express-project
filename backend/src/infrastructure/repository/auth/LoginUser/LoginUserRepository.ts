@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import { injectable, inject } from 'inversify'
 import { AppDataSource } from '@/data-source'
 import { ILoginUserRepository } from '@/domain/auth/LoginUser/ILoginUserRepository'
