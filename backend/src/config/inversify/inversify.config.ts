@@ -22,15 +22,15 @@ const rootContainer = new Container()
 /* auth **************************************************/
 
 // Authenticate
-rootContainer.bind<AuthenticationService>(TYPES.AuthenticationService).to(AuthenticationService).inSingletonScope()
+rootContainer.bind<IAuthenticationService>(TYPES.AuthenticationService).to(AuthenticationService).inSingletonScope()
 rootContainer
   .bind<AuthenticationController>(TYPES.AuthenticationController)
   .to(AuthenticationController)
   .inSingletonScope()
 
 // LoginUser
-rootContainer.bind<LoginUserRepository>(TYPES.LoginUserRepository).to(LoginUserRepository).inSingletonScope()
-rootContainer.bind<LoginUserService>(TYPES.LoginUserService).to(LoginUserService).inSingletonScope()
+rootContainer.bind<ILoginUserRepository>(TYPES.LoginUserRepository).to(LoginUserRepository).inSingletonScope()
+rootContainer.bind<ILoginUserService>(TYPES.LoginUserService).to(LoginUserService).inSingletonScope()
 rootContainer.bind<LoginUserController>(TYPES.LoginUserController).to(LoginUserController).inSingletonScope()
 
 /* master **************************************************/
@@ -57,4 +57,6 @@ container.bind<Connection>('AppDataSource').toDynamicValue(appDataSourceFactory)
     process.env.NODE_ENV === 'production' ? new DocDB() : new Mongo()
   );
  */
-export const container = rootContainer.createChild()
+const container = rootContainer.createChild()
+
+export { container }
