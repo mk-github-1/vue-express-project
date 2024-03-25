@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import { Request, Response, NextFunction } from 'express'
 import { injectable, inject } from 'inversify'
 import bcrypt from 'bcrypt'
