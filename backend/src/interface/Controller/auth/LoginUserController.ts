@@ -85,9 +85,9 @@ export class LoginUserController /* implements IGenericController */ {
   async delete(request: Request, response: Response, next: NextFunction) {
     try {
       // Request bodyのvalidationを実施する
-      const loginUserDto: LoginUserDto = request.body
+      const keys: string[] = request.body.keys
 
-      await this.loginUserService.delete(loginUserDto)
+      await this.loginUserService.delete(keys)
       next()
     } catch (error: any) {
       next(error)
