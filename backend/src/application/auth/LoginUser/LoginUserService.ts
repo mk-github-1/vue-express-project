@@ -56,9 +56,7 @@ export class LoginUserService implements ILoginUserService {
     return await this.loginUserRepository.update(keys, loginUserDto)
   }
 
-  async delete(loginUserDto: LoginUserDto): Promise<string> {
-    let keys = []
-    keys.push(loginUserDto['account'])
+  async delete(keys: string[]): Promise<string[]> {
     return await this.loginUserRepository.delete(keys)
   }
 
