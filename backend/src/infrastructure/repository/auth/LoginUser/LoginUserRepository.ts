@@ -5,7 +5,7 @@ import { DataSource } from 'typeorm'
 import { AppDataSource } from '@/data-source'
 import { ILoginUserRepository } from '@/domain/auth/LoginUser/ILoginUserRepository'
 import { LoginUserEntity } from '@/infrastructure/entity/auth/LoginUserEntity'
-import { LoginUserDto } from '@/application/auth/LoginUser/LoginUserDto'
+import { LoginUserDto } from '@/domain/auth/LoginUser/LoginUserDto'
 
 @injectable()
 export class LoginUserRepository implements ILoginUserRepository {
@@ -111,7 +111,7 @@ export class LoginUserRepository implements ILoginUserRepository {
   }
 
   // ソート(サンプル、LoginUserでは使用しない)
-  async sort<T extends { key: string; value: number }>(lists: T[]): Promise<number> {
+  async sort<T extends { keys: string[]; value: number }>(lists: T[]): Promise<number> {
     // 同じ順序がある時、更新日の新しいものを上にする、isDeleted == trueは順序を後にする
     let sql = `
       DECLARE @temp TABLE (

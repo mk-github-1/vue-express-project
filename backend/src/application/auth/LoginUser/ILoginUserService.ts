@@ -1,5 +1,5 @@
 import { IGenericService } from '@/domain/utility/generic-interface/IGenericService'
-import { LoginUserDto } from '@/application/auth/LoginUser/LoginUserDto'
+import { LoginUserDto } from '@/domain/auth/LoginUser/LoginUserDto'
 
 export interface ILoginUserService extends IGenericService<LoginUserDto> {
   find(): Promise<LoginUserDto[]>

@@ -5,7 +5,7 @@ import { CustomException } from '@/domain/utility/error/CustomException'
 import { IAuthenticationService } from '@/application/auth/Authentication/IAuthenticationService'
 import { AuthenticationDto } from '@/application/auth/Authentication/AuthenticationDto'
 import { ILoginUserRepository } from '@/domain/auth/LoginUser/ILoginUserRepository'
-import { LoginUserDto } from '@/application/auth/LoginUser/LoginUserDto'
+import { LoginUserDto } from '@/domain/auth/LoginUser/LoginUserDto'
 
 @injectable()
 export class AuthenticationService implements IAuthenticationService {

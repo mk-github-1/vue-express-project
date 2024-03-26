@@ -17,7 +17,7 @@ import { LoginUserRoleEntity } from './LoginUserRoleEntity'
  * LoginUser: ログインユーザー
  *
  */
-// @Entity('login_user')
+// @Entity('a_login_user')
 @Entity()
 export class LoginUserEntity {
   constructor(data: {

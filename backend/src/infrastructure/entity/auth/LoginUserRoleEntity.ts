@@ -18,8 +18,7 @@ import { RoleEntity } from './RoleEntity'
  * LoginUserRole: ログインユーザー権限の中間テーブル
  *
  */
-// @Entity('login_user_role')
-@Entity()
+@Entity('a_login_user_role')
 export class LoginUserRoleEntity {
   constructor(data: { account: string; roleId: string; sortOrder: number; isDeleted: boolean }) {
     this.account = data ? data.account : ''

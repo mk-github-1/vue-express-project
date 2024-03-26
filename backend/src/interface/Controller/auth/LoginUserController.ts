@@ -3,7 +3,7 @@ import { Request, Response, NextFunction } from 'express'
 import { injectable, inject } from 'inversify'
 import { TYPES } from '@/config/inversify/types'
 import { ILoginUserService } from '@/application/auth/LoginUser/ILoginUserService'
-import { LoginUserDto } from '@/application/auth/LoginUser/LoginUserDto'
+import { LoginUserDto } from '@/domain/auth/LoginUser/LoginUserDto'
 
 @injectable()
 export class LoginUserController /* implements IGenericController */ {
@@ -22,18 +22,18 @@ export class LoginUserController /* implements IGenericController */ {
   async get(request: Request, response: Response, next: NextFunction) {
     try {
       // Request paramが不正でないかvalidationを実施する
-      const keys: string[] = Object.entries(request.query).map(([key, value]) => `${key}=${value}`);
+      const keys: string[] = Object.entries(request.query).map(([key, value]) => `${key}=${value}`)
+
+      let loginUserDtos = []
 
       if (!keys) {
-        const loginUserDtos = await this.loginUserService.find()
-        response.json(loginUserDtos)
+        loginUserDtos = await this.loginUserService.find()
       } else {
         const loginUserDto = await this.loginUserService.findOne(keys)
-        let loginUserDtos = []
         loginUserDtos.push(loginUserDto)
-        response.json(loginUserDtos)
       }
 
+      response.json(loginUserDtos)
       next()
     } catch (error: any) {
       // エラーを次のミドルウェアに渡す
@@ -85,7 +85,7 @@ export class LoginUserController /* implements IGenericController */ {
   async delete(request: Request, response: Response, next: NextFunction) {
     try {
       // Request bodyのvalidationを実施する
-      const keys: string[] = Object.entries(request.query).map(([key, value]) => `${key}=${value}`);
+      const keys: string[] = Object.entries(request.query).map(([key, value]) => `${key}=${value}`)
 
       await this.loginUserService.delete(keys)
       next()

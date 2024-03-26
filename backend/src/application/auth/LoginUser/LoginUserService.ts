@@ -4,7 +4,7 @@ import { TYPES } from '@/config/inversify/types'
 import { CustomException } from '@/domain/utility/error/CustomException'
 import { ILoginUserRepository } from '@/domain/auth/LoginUser/ILoginUserRepository'
 import { ILoginUserService } from '@/application/auth/LoginUser/ILoginUserService'
-import { LoginUserDto } from '@/application/auth/LoginUser/LoginUserDto'
+import { LoginUserDto } from '@/domain/auth/LoginUser/LoginUserDto'
 
 @injectable()
 export class LoginUserService implements ILoginUserService {
@@ -35,8 +35,6 @@ export class LoginUserService implements ILoginUserService {
 
   async findOne(keys: string[]): Promise<LoginUserDto> {
     let loginUserDtos: LoginUserDto[] = []
-
-    const account = keys[0]
     const loginUserDto = await this.loginUserRepository.findOne(keys)
 
     if (!loginUserDtos.length) {
@@ -62,9 +60,9 @@ export class LoginUserService implements ILoginUserService {
 
   async sort(loginUserDtos: LoginUserDto[]): Promise<number> {
     // sortListsを作成
-    const lists = loginUserDtos.map((currentValue) => ({
-      key: currentValue.account,
-      value: currentValue.sortOrder
+    const lists: { keys: string[]; value: number }[] = loginUserDtos.map((currentValue) => ({
+      keys: [currentValue['account'], 'test'],
+      value: currentValue['sortOrder']
     }))
 
     return await this.loginUserRepository.sort(lists)
