@@ -9,8 +9,11 @@ export const authenticationRouter = () => {
   const authenticationController = container.get<AuthenticationController>(TYPES.AuthenticationController)
 
   router
-    .route('/')
+    .route('/:keys')
     .get(authenticationController.get.bind(authenticationController))
+    
+  router
+    .route('/')
     .post(authenticationController.post.bind(authenticationController))
     .patch(authenticationController.patch.bind(authenticationController))
 
