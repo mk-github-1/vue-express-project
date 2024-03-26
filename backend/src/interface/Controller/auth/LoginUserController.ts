@@ -24,17 +24,17 @@ export class LoginUserController /* implements IGenericController */ {
       // Request paramが不正でないかvalidationを実施する
       const keys: string[] = Object.entries(request.params).map(([key, value]) => `${key}=${value}`);
 
-      let loginUserDtos = []
-
       if (!keys) {
-        loginUserDtos = await this.loginUserService.find()
+        const loginUserDtos = await this.loginUserService.find()
+        response.json(loginUserDtos)
       } else {
         const loginUserDto = await this.loginUserService.findOne(keys)
+        let loginUserDtos = []
         loginUserDtos.push(loginUserDto)
+        response.json(loginUserDtos)
       }
 
-      response.json(loginUserDtos)
-      // next()
+      next()
     } catch (error: any) {
       // エラーを次のミドルウェアに渡す
       next(error)
