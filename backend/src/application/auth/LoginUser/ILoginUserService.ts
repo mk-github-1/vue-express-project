@@ -6,6 +6,6 @@ export interface ILoginUserService extends IGenericService<LoginUserDto> {
   findOne(keys: string[]): Promise<LoginUserDto>
   create(loginUserDto: LoginUserDto): Promise<LoginUserDto>
   update(loginUserDto: LoginUserDto): Promise<LoginUserDto>
-  delete(loginUserDto: LoginUserDto): Promise<string>
+  delete(keys: string[]): Promise<string[]>
   sort(loginUserDtos: LoginUserDto[]): Promise<number>
 }
