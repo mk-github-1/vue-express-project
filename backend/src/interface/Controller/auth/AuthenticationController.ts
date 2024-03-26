@@ -22,12 +22,13 @@ export class AuthenticationController {
   // GET
   async get(request: Request<any, any, { email: string; password: string }>, response: Response, next: NextFunction) {
     // Requestのvalidation実施
+      const keys: string[] = Object.entries(request.params).map(([key, value]) => `${key}=${value}`);
 
     // ログイン処理
     // ※Serviceに移動する
     const { email, password } = request.body
-    let keys = [email, password]
-    const loggingInUser = await this.authenticationService.findOne(keys)
+    let keys2 = [email, password]
+    const loggingInUser = await this.authenticationService.findOne(keys2)
 
     if (!loggingInUser) throw new Error()
     const isPasswordCorrect2 = await bcrypt.compare(password, loggingInUser.password)
