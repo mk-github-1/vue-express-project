@@ -22,7 +22,7 @@ export class LoginUserController /* implements IGenericController */ {
   async get(request: Request, response: Response, next: NextFunction) {
     try {
       // Request paramが不正でないかvalidationを実施する
-      const keys: string[] = request.body.keys
+      const keys: string[] = Object.entries(request.params).map(([key, value]) => `${key}=${value}`);
 
       let loginUserDtos = []
 
@@ -85,7 +85,7 @@ export class LoginUserController /* implements IGenericController */ {
   async delete(request: Request, response: Response, next: NextFunction) {
     try {
       // Request bodyのvalidationを実施する
-      const keys: string[] = request.body.keys
+      const keys: string[] = Object.entries(request.params).map(([key, value]) => `${key}=${value}`);
 
       await this.loginUserService.delete(keys)
       next()
