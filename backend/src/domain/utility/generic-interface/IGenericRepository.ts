@@ -7,6 +7,6 @@ export interface IGenericRepository<T> {
   findOne(keys: string[]): Promise<T>
   create(item: T): Promise<T>
   update(keys: string[], item: T): Promise<T>
-  delete(keys: string[]): Promise<string>
+  delete(keys: string[]): Promise<string[]>
   sort<T extends { key: string; value: number }>(lists: T[]): Promise<number>
 }
