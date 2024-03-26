@@ -98,7 +98,7 @@ export class LoginUserRepository implements ILoginUserRepository {
   }
 
   // 削除
-  async delete(keys: string[]): Promise<string> {
+  async delete(keys: string[]): Promise<string[]> {
     const account = keys[0]
 
     // 物理削除
@@ -107,7 +107,7 @@ export class LoginUserRepository implements ILoginUserRepository {
     // 論理削除の例
     // await this.appDataSource.getRepository(LoginUserEntity).softDelete({ account })
 
-    return account
+    return keys
   }
 
   // ソート(サンプル、LoginUserでは使用しない)
