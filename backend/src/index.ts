@@ -59,22 +59,23 @@ app.use((error: CustomException, request: Request, response: Response, nextFunct
 })
 
 // ■ 追加: ポート設定がなかったので追加、これで起動できる
-// const port = 5000 // process.env.PORT ||
-app.listen(3000, () => {
-  // console.log(`Server is running on port ${port}`)
-  console.log(`Server is running on port 3000`)
+const httpPort: number = 3000 // process.env.PORT ||
+app.listen(httpPort, () => {
+  console.log(`Server is running on port ${httpPort}`)
 })
 
 // ■ 追加: データベース接続を確立する
-/*
-app.listen(5000, () => {
+// mysqlは3306、postresqlは5423、sqliteはダミー番号で指定
+const dbPort: number = 5000
+app.listen(dbPort, () => {
   try {
     AppDataSource.initialize()
-    console.log('Data Source has been initialized!')
+    console.log(`Data Source has been initialized on port ${httpPort}`)
   } catch (error: any) {
     console.error('Error during Data Source initialization:', error)
     throw error
+    // process.exit(1);
   }
 })
- */
+
 module.exports = app
