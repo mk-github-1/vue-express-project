@@ -10,13 +10,18 @@ export const loginUserRouter = () => {
   const loginUserController = container.get<LoginUserController>(TYPES.LoginUserController)
 
   router
+    .route('/:keys')
+    .get(loginUserController.get.bind(LoginUserController))
+
+  router
     .route('/')
     .get(loginUserController.get.bind(LoginUserController))
     .post(loginUserController.post.bind(LoginUserController))
     .patch(loginUserController.patch.bind(LoginUserController))
+
+  router
+    .route('/:keys')
     .delete(loginUserController.delete.bind(LoginUserController))
-  // router.route('/:id').post(LoginUserController.patch.bind(LoginUserController))
-  // router.route('/:id').delete(LoginUserController.delete.bind(LoginUserController))
 
   return router
 }
