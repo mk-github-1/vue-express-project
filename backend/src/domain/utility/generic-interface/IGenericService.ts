@@ -7,6 +7,6 @@ export interface IGenericService<T> {
   findOne(keys: string[]): Promise<T>
   create(item: T): Promise<T>
   update(item: T): Promise<T>
-  delete(item: T): Promise<string>
+  delete(keys: string[]): Promise<string[]>
   sort(lists: T[]): Promise<number>
 }
