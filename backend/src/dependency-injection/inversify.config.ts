@@ -1,6 +1,6 @@
 import 'reflect-metadata'
 import { Container } from 'inversify'
-import { TYPES } from '@/config/inversify/types'
+import { TYPES } from '@/dependency-injection/types'
 import { DataSource } from 'typeorm'
 import { AppDataSource } from '@/data-source'
 

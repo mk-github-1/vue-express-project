@@ -34,3 +34,6 @@ playwright-report/
 
 # sqlite3
 # data.db
+
+# typorm
+migrations

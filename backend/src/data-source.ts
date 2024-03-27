@@ -4,9 +4,7 @@ import { DataSource } from 'typeorm'
 import { LoginUserEntity } from './infrastructure/entity/auth/LoginUserEntity'
 import { LoginUserRoleEntity } from './infrastructure/entity/auth/LoginUserRoleEntity'
 import { RoleEntity } from './infrastructure/entity/auth/RoleEntity'
-import { CustomNamingStrategy } from './config/typeorm/CustomNamingStrategy'
-
-const customNamingStrategy = new CustomNamingStrategy()
+import { CustomNamingStrategy } from './infrastructure/typeorm-custom-setting/CustomNamingStrategy'
 
 export const AppDataSource = new DataSource({
   // 1.利用するデータベース

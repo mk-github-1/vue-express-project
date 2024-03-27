@@ -16,7 +16,7 @@ import {
  * Role: 権限
  *
  */
-@Entity('a_role')
+@Entity('auth_roles')
 export class RoleEntity {
   constructor(data: { roleId: string; roleName: string; sortOrder: number; isDeleted: boolean }) {
     this.roleId = data ? data.roleId : ''
