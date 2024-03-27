@@ -1,11 +1,11 @@
+import pluralize from 'pluralize'
 import { DefaultNamingStrategy, NamingStrategyInterface, Table } from 'typeorm'
 import { RandomGenerator } from 'typeorm/util/RandomGenerator'
 import { camelCase, snakeCase, titleCase } from 'typeorm/util/StringUtils'
-// import { Table } from "../schema-builder/table/Table"
 
 /**
  * DefaultNamingStrategy(テーブルの命名規則)をカスタマイズ
- * (変更箇所) columnName
+ * (変更箇所) tableName, columnName,
  *
  */
 export class CustomNamingStrategy extends DefaultNamingStrategy implements NamingStrategyInterface {
@@ -23,7 +23,10 @@ export class CustomNamingStrategy extends DefaultNamingStrategy implements Namin
    * @param userSpecifiedName For example if user specified a table name in a decorator, e.g. @Entity("name")
    */
   tableName(targetName: string, userSpecifiedName: string | undefined): string {
-    return userSpecifiedName ? userSpecifiedName : snakeCase(targetName)
+    // return userSpecifiedName ? userSpecifiedName : snakeCase(targetName)
+
+    // 変更
+    return userSpecifiedName ? userSpecifiedName : pluralize.plural(snakeCase(targetName))
   }
 
   /**
@@ -48,7 +51,8 @@ export class CustomNamingStrategy extends DefaultNamingStrategy implements Namin
     return name
      */
 
-    return snakeCase(embeddedPrefixes.join('_')) + (customName || snakeCase(propertyName))
+    // 変更
+    return customName ? customName : snakeCase(propertyName)
   }
 
   relationName(propertyName: string): string {
@@ -137,7 +141,10 @@ export class CustomNamingStrategy extends DefaultNamingStrategy implements Namin
   }
 
   joinColumnName(relationName: string, referencedColumnName: string): string {
-    return camelCase(relationName + '_' + referencedColumnName)
+    // return camelCase(relationName + '_' + referencedColumnName)
+
+    // 変更
+    return snakeCase(pluralize.singular(relationName) + '_' + referencedColumnName)
   }
 
   joinTableName(
@@ -146,7 +153,10 @@ export class CustomNamingStrategy extends DefaultNamingStrategy implements Namin
     firstPropertyName: string,
     secondPropertyName: string
   ): string {
-    return snakeCase(firstTableName + '_' + firstPropertyName.replace(/\./gi, '_') + '_' + secondTableName)
+    // return snakeCase(firstTableName + '_' + firstPropertyName.replace(/\./gi, '_') + '_' + secondTableName)
+
+    // 変更
+    return snakeCase(firstTableName + '_' + secondTableName)
   }
 
   joinTableColumnDuplicationPrefix(columnName: string, index: number): string {
@@ -154,7 +164,10 @@ export class CustomNamingStrategy extends DefaultNamingStrategy implements Namin
   }
 
   joinTableColumnName(tableName: string, propertyName: string, columnName?: string): string {
-    return camelCase(tableName + '_' + (columnName ? columnName : propertyName))
+    // return camelCase(tableName + '_' + (columnName ? columnName : propertyName))
+
+    // 変更
+    return snakeCase(pluralize.singular(tableName) + '_' + (columnName || propertyName))
   }
 
   joinTableInverseColumnName(tableName: string, propertyName: string, columnName?: string): string {
